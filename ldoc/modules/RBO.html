@@ -1,0 +1,224 @@
+---
+layout: default
+title: RBO
+permalink: ldoc/modules/RBO.html
+description: RBO
+parent: Lua API
+table: 0x5573776c0420
+---
+
+{% raw %}
+    <h1>Module <code>RBO</code></h1>
+    <p>RBO</p>
+    <p>
+
+<hr/>
+</p>
+      <h3>See also:</h3>
+      <ul>
+          <li><a href="https://github.com/beyond-all-reason/spring/blob/BAR105/rts/Lua/LuaRBOs.cpp">rts/Lua/LuaRBOs.cpp</a></li>
+      </ul>
+
+        <h2><a href="#Functions">Functions</a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#gl.CreateRBO">gl.CreateRBO</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#gl.DeleteRBO">gl.DeleteRBO</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Tables">Tables</a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#rbo">rbo</a>
+            </dt>
+            <dd>
+              User Data RBO
+            </dd>
+        </dl>
+
+      <h2 id="Functions" class="section-header ">
+        <a href="#Functions" class="anchor-heading" aria-labelledby="Functions">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Functions
+      </h2>
+
+        <h3 id="gl.CreateRBO">
+          <a href="#gl.CreateRBO" class="anchor-heading" aria-labelledby="gl.CreateRBO">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          gl.CreateRBO(xsize, ysize, data)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>xsize</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>ysize</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+             <li><span class="parameter">data</span>
+
+
+               <ul>
+                 <li>
+                   <code>target</code>
+                   <strong><span class="type">number</span></strong>
+                    <code>GL_RENDERBUFFER_EXT</code>
+                 </li>
+                 <li>
+                   <code>format</code>
+                   <strong><span class="type">number</span></strong>
+                    <code>GL_RGBA</code>
+                 </li>
+                 <li>
+                   <code>samples</code>
+                   <strong><span class="type">number</span></strong>
+                    any number here will result in creation of multisampled RBO
+                   (<em>optional</em>)
+                 </li>
+             </li></ul>
+           </ol>
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="gl.DeleteRBO">
+          <a href="#gl.DeleteRBO" class="anchor-heading" aria-labelledby="gl.DeleteRBO">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          gl.DeleteRBO(rbo)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>rbo</code>
+                   <strong><a class="type" href="../modules/RBO.html#rbo">rbo</a></strong>
+
+
+
+                 </li>
+           </ol>
+
+
+
+
+        </div>
+        <hr>
+      <h2 id="Tables" class="section-header ">
+        <a href="#Tables" class="anchor-heading" aria-labelledby="Tables">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Tables
+      </h2>
+
+        <h3 id="rbo">
+          <a href="#rbo" class="anchor-heading" aria-labelledby="rbo">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          rbo
+        </h3>
+        <p>User Data RBO</p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Fields:</h4>
+           <ol>
+                 <li>
+                   <code>target</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>format</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>xsize</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>ysize</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>valid</code>
+                   <strong><span class="type">boolean</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>samples</code>
+                   <strong><span class="type">number</span></strong>
+                    will return globalRendering->msaaLevel for multisampled RBO or 0 otherwise
+                 </li>
+           </ol>
+
+
+
+
+        </div>
+        <hr>
+
+{% endraw %}

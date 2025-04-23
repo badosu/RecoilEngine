@@ -1,0 +1,7547 @@
+---
+layout: default
+title: SyncedRead
+permalink: ldoc/modules/SyncedRead.html
+description: Synced Read
+parent: Lua API
+table: 0x5573770429a0
+---
+
+{% raw %}
+    <h1>Module <code>SyncedRead</code></h1>
+    <p>Synced Read</p>
+    <p>
+
+<hr/>
+</p>
+      <h3>See also:</h3>
+      <ul>
+          <li><a href="https://github.com/beyond-all-reason/spring/blob/BAR105/rts/Lua/LuaSyncedRead.cpp">rts/Lua/LuaSyncedRead.cpp</a></li>
+      </ul>
+
+        <h2><a href="#Teams">Teams </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#Spring.GetGaiaTeamID">Spring.GetGaiaTeamID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetAllyTeamStartBox">Spring.GetAllyTeamStartBox</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamStartPosition">Spring.GetTeamStartPosition</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Misc">Misc </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#Spring.GetMapStartPositions">Spring.GetMapStartPositions</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetAllyTeamList">Spring.GetAllyTeamList</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamList">Spring.GetTeamList</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetPlayerList">Spring.GetPlayerList</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamInfo">Spring.GetTeamInfo</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamAllyTeamID">Spring.GetTeamAllyTeamID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamResources">Spring.GetTeamResources</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamUnitStats">Spring.GetTeamUnitStats</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamResourceStats">Spring.GetTeamResourceStats</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamStatsHistory">Spring.GetTeamStatsHistory</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamLuaAI">Spring.GetTeamLuaAI</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetPlayerInfo">Spring.GetPlayerInfo</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetPlayerControlledUnit">Spring.GetPlayerControlledUnit</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetAIInfo">Spring.GetAIInfo</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetAllyTeamInfo">Spring.GetAllyTeamInfo</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.AreTeamsAllied">Spring.AreTeamsAllied</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.ArePlayersAllied">Spring.ArePlayersAllied</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetAllUnits">Spring.GetAllUnits</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamUnits">Spring.GetTeamUnits</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamUnitsSorted">Spring.GetTeamUnitsSorted</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamUnitsCounts">Spring.GetTeamUnitsCounts</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamUnitsByDefs">Spring.GetTeamUnitsByDefs</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamUnitDefCount">Spring.GetTeamUnitDefCount</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamUnitCount">Spring.GetTeamUnitCount</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitsInRectangle">Spring.GetUnitsInRectangle</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitsInBox">Spring.GetUnitsInBox</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitsInCylinder">Spring.GetUnitsInCylinder</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitsInSphere">Spring.GetUnitsInSphere</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitsInPlanes">Spring.GetUnitsInPlanes</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitNearestAlly">Spring.GetUnitNearestAlly</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitNearestEnemy">Spring.GetUnitNearestEnemy</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturesInRectangle">Spring.GetFeaturesInRectangle</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturesInSphere">Spring.GetFeaturesInSphere</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturesInCylinder">Spring.GetFeaturesInCylinder</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectilesInRectangle">Spring.GetProjectilesInRectangle</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.ValidUnitID">Spring.ValidUnitID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitStates">Spring.GetUnitStates</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitArmored">Spring.GetUnitArmored</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitIsActive">Spring.GetUnitIsActive</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitIsCloaked">Spring.GetUnitIsCloaked</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitSelfDTime">Spring.GetUnitSelfDTime</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitStockpile">Spring.GetUnitStockpile</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitSensorRadius">Spring.GetUnitSensorRadius</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitPosErrorParams">Spring.GetUnitPosErrorParams</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitTooltip">Spring.GetUnitTooltip</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitDefID">Spring.GetUnitDefID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitTeam">Spring.GetUnitTeam</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitAllyTeam">Spring.GetUnitAllyTeam</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitNeutral">Spring.GetUnitNeutral</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitHealth">Spring.GetUnitHealth</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitIsDead">Spring.GetUnitIsDead</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitIsStunned">Spring.GetUnitIsStunned</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitResources">Spring.GetUnitResources</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitMetalExtraction">Spring.GetUnitMetalExtraction</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitExperience">Spring.GetUnitExperience</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitHeight">Spring.GetUnitHeight</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitRadius">Spring.GetUnitRadius</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitMass">Spring.GetUnitMass</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitPosition">Spring.GetUnitPosition</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitBasePosition">Spring.GetUnitBasePosition</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitVectors">Spring.GetUnitVectors</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitRotation">Spring.GetUnitRotation</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitDirection">Spring.GetUnitDirection</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitHeading">Spring.GetUnitHeading</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitVelocity">Spring.GetUnitVelocity</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitBuildFacing">Spring.GetUnitBuildFacing</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitIsBuilding">Spring.GetUnitIsBuilding</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitCurrentBuildPower">Spring.GetUnitCurrentBuildPower</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitHarvestStorage">Spring.GetUnitHarvestStorage</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitBuildParams">Spring.GetUnitBuildParams</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitInBuildStance">Spring.GetUnitInBuildStance</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitNanoPieces">Spring.GetUnitNanoPieces</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitTransporter">Spring.GetUnitTransporter</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitIsTransporting">Spring.GetUnitIsTransporting</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitShieldState">Spring.GetUnitShieldState</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitFlanking">Spring.GetUnitFlanking</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitMaxRange">Spring.GetUnitMaxRange</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitWeaponState">Spring.GetUnitWeaponState</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitWeaponDamages">Spring.GetUnitWeaponDamages</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitWeaponVectors">Spring.GetUnitWeaponVectors</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitWeaponTryTarget">Spring.GetUnitWeaponTryTarget</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitWeaponTestTarget">Spring.GetUnitWeaponTestTarget</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitWeaponTestRange">Spring.GetUnitWeaponTestRange</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitWeaponHaveFreeLineOfFire">Spring.GetUnitWeaponHaveFreeLineOfFire</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitWeaponCanFire">Spring.GetUnitWeaponCanFire</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitWeaponTarget">Spring.GetUnitWeaponTarget</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitEstimatedPath">Spring.GetUnitEstimatedPath</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitLastAttacker">Spring.GetUnitLastAttacker</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitLastAttackedPiece">Spring.GetUnitLastAttackedPiece</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitCollisionVolumeData">Spring.GetUnitCollisionVolumeData</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitSeparation">Spring.GetUnitSeparation</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitFeatureSeparation">Spring.GetUnitFeatureSeparation</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitDefDimensions">Spring.GetUnitDefDimensions</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetCEGID">Spring.GetCEGID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitBlocking">Spring.GetUnitBlocking</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitMoveTypeData">Spring.GetUnitMoveTypeData</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitCurrentCommand">Spring.GetUnitCurrentCommand</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitCommands">Spring.GetUnitCommands</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFactoryCommands">Spring.GetFactoryCommands</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFactoryBuggerOff">Spring.GetFactoryBuggerOff</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFactoryCounts">Spring.GetFactoryCounts</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetCommandQueue">Spring.GetCommandQueue</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFullBuildQueue">Spring.GetFullBuildQueue</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetRealBuildQueue">Spring.GetRealBuildQueue</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitCmdDescs">Spring.GetUnitCmdDescs</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.FindUnitCmdDesc">Spring.FindUnitCmdDesc</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.ValidFeatureID">Spring.ValidFeatureID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetAllFeatures">Spring.GetAllFeatures</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureDefID">Spring.GetFeatureDefID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureTeam">Spring.GetFeatureTeam</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureAllyTeam">Spring.GetFeatureAllyTeam</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureHealth">Spring.GetFeatureHealth</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureHeight">Spring.GetFeatureHeight</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureRadius">Spring.GetFeatureRadius</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureMass">Spring.GetFeatureMass</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturePosition">Spring.GetFeaturePosition</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureSeparation">Spring.GetFeatureSeparation</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureRotation">Spring.GetFeatureRotation</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureDirection">Spring.GetFeatureDirection</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureVelocity">Spring.GetFeatureVelocity</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureHeading">Spring.GetFeatureHeading</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureResources">Spring.GetFeatureResources</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureBlocking">Spring.GetFeatureBlocking</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureNoSelect">Spring.GetFeatureNoSelect</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureResurrect">Spring.GetFeatureResurrect</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureLastAttackedPiece">Spring.GetFeatureLastAttackedPiece</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureCollisionVolumeData">Spring.GetFeatureCollisionVolumeData</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturePieceCollisionVolumeData">Spring.GetFeaturePieceCollisionVolumeData</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectilePosition">Spring.GetProjectilePosition</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileDirection">Spring.GetProjectileDirection</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileVelocity">Spring.GetProjectileVelocity</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileGravity">Spring.GetProjectileGravity</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetPieceProjectileParams">Spring.GetPieceProjectileParams</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileTarget">Spring.GetProjectileTarget</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileIsIntercepted">Spring.GetProjectileIsIntercepted</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileTimeToLive">Spring.GetProjectileTimeToLive</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileOwnerID">Spring.GetProjectileOwnerID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileTeamID">Spring.GetProjectileTeamID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileAllyTeamID">Spring.GetProjectileAllyTeamID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileType">Spring.GetProjectileType</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileDefID">Spring.GetProjectileDefID</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileDamages">Spring.GetProjectileDamages</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetProjectileName">Spring.GetProjectileName</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGroundHeight">Spring.GetGroundHeight</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGroundOrigHeight">Spring.GetGroundOrigHeight</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGroundNormal">Spring.GetGroundNormal</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGroundInfo">Spring.GetGroundInfo</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGroundBlocked">Spring.GetGroundBlocked</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGroundExtremes">Spring.GetGroundExtremes</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTerrainTypeData">Spring.GetTerrainTypeData</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGrass">Spring.GetGrass</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetSmoothMeshHeight">Spring.GetSmoothMeshHeight</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.TestMoveOrder">Spring.TestMoveOrder</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.TestBuildOrder">Spring.TestBuildOrder</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.Pos2BuildPos">Spring.Pos2BuildPos</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.ClosestBuildPos">Spring.ClosestBuildPos</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetPositionLosState">Spring.GetPositionLosState</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsPosInLos">Spring.IsPosInLos</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsPosInRadar">Spring.IsPosInRadar</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsPosInAirLos">Spring.IsPosInAirLos</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitLosState">Spring.GetUnitLosState</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsUnitInLos">Spring.IsUnitInLos</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsUnitInAirLos">Spring.IsUnitInAirLos</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsUnitInRadar">Spring.IsUnitInRadar</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsUnitInJammer">Spring.IsUnitInJammer</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetRadarErrorParams">Spring.GetRadarErrorParams</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Game_States">Game States </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#Spring.IsCheatingEnabled">Spring.IsCheatingEnabled</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsGodModeEnabled">Spring.IsGodModeEnabled</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsDevLuaEnabled">Spring.IsDevLuaEnabled</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsEditDefsEnabled">Spring.IsEditDefsEnabled</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsNoCostEnabled">Spring.IsNoCostEnabled</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGlobalLos">Spring.GetGlobalLos</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.AreHelperAIsEnabled">Spring.AreHelperAIsEnabled</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.FixedAllies">Spring.FixedAllies</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.IsGameOver">Spring.IsGameOver</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Speed_Time">Speed/Time </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#Spring.GetGameFrame">Spring.GetGameFrame</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGameSeconds">Spring.GetGameSeconds</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Environment">Environment </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#Spring.GetTidal">Spring.GetTidal</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetWind">Spring.GetWind</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Rules_Params">Rules/Params </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#Spring.GetGameRulesParams">Spring.GetGameRulesParams</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamRulesParams">Spring.GetTeamRulesParams</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitRulesParams">Spring.GetUnitRulesParams</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureRulesParams">Spring.GetFeatureRulesParams</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetGameRulesParam">Spring.GetGameRulesParam</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetTeamRulesParam">Spring.GetTeamRulesParam</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitRulesParam">Spring.GetUnitRulesParam</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeatureRulesParam">Spring.GetFeatureRulesParam</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Mod_and_Map_options">Mod and Map options </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#Spring.GetMapOptions">Spring.GetMapOptions</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetModOptions">Spring.GetModOptions</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Vectors">Vectors </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#Spring.GetHeadingFromVector">Spring.GetHeadingFromVector</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetVectorFromHeading">Spring.GetVectorFromHeading</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Sides_and_Factions">Sides and Factions </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#sideSpec">sideSpec</a>
+            </dt>
+            <dd>
+              Side spec
+            </dd>
+            <dt>
+              <a href="#Spring.GetSideData">Spring.GetSideData</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetSideData">Spring.GetSideData</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetSideData">Spring.GetSideData</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+        <h2><a href="#Piece_Script">Piece/Script </a></h2>
+        <dl class="big-dt">
+            <dt>
+              <a href="#pieceSpec">pieceSpec</a>
+            </dt>
+            <dd>
+              Piece spec
+            </dd>
+            <dt>
+              <a href="#Spring.GetModelPieceMap">Spring.GetModelPieceMap</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetModelPieceList">Spring.GetModelPieceList</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitPieceMap">Spring.GetUnitPieceMap</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitPieceList">Spring.GetUnitPieceList</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitPieceInfo">Spring.GetUnitPieceInfo</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitPiecePosDir">Spring.GetUnitPiecePosDir</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitPiecePosition">Spring.GetUnitPiecePosition</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitPieceDirection">Spring.GetUnitPieceDirection</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitPieceMatrix">Spring.GetUnitPieceMatrix</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturePieceMap">Spring.GetFeaturePieceMap</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturePieceList">Spring.GetFeaturePieceList</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturePieceInfo">Spring.GetFeaturePieceInfo</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturePiecePosDir">Spring.GetFeaturePiecePosDir</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturePiecePosition">Spring.GetFeaturePiecePosition</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturePieceDirection">Spring.GetFeaturePieceDirection</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetFeaturePieceMatrix">Spring.GetFeaturePieceMatrix</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitScriptPiece">Spring.GetUnitScriptPiece</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+            <dt>
+              <a href="#Spring.GetUnitScriptNames">Spring.GetUnitScriptNames</a>
+            </dt>
+            <dd>
+
+
+
+            </dd>
+        </dl>
+
+      <h2 id="Teams" class="section-header has-description">
+        <a href="#Teams" class="anchor-heading" aria-labelledby="Teams">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Teams
+      </h2>
+
+        <p>
+
+<hr/>
+</p>
+        <h3 id="Spring.GetGaiaTeamID">
+          <a href="#Spring.GetGaiaTeamID" class="anchor-heading" aria-labelledby="Spring.GetGaiaTeamID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGaiaTeamID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span></strong>
+              teamID</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetAllyTeamStartBox">
+          <a href="#Spring.GetAllyTeamStartBox" class="anchor-heading" aria-labelledby="Spring.GetAllyTeamStartBox">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetAllyTeamStartBox(allyID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>allyID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span></strong>
+              xMin</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              zMin</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              xMax</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              zMax</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamStartPosition">
+          <a href="#Spring.GetTeamStartPosition" class="anchor-heading" aria-labelledby="Spring.GetTeamStartPosition">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamStartPosition(teamID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>teamID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span></strong>
+              x</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              y</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              x</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+      <h2 id="Misc" class="section-header has-description">
+        <a href="#Misc" class="anchor-heading" aria-labelledby="Misc">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Misc
+      </h2>
+
+        <p>
+
+<hr/>
+</p>
+        <h3 id="Spring.GetMapStartPositions">
+          <a href="#Spring.GetMapStartPositions" class="anchor-heading" aria-labelledby="Spring.GetMapStartPositions">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetMapStartPositions()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetAllyTeamList">
+          <a href="#Spring.GetAllyTeamList" class="anchor-heading" aria-labelledby="Spring.GetAllyTeamList">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetAllyTeamList()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamList">
+          <a href="#Spring.GetTeamList" class="anchor-heading" aria-labelledby="Spring.GetTeamList">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamList()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetPlayerList">
+          <a href="#Spring.GetPlayerList" class="anchor-heading" aria-labelledby="Spring.GetPlayerList">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetPlayerList()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamInfo">
+          <a href="#Spring.GetTeamInfo" class="anchor-heading" aria-labelledby="Spring.GetTeamInfo">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamInfo()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamAllyTeamID">
+          <a href="#Spring.GetTeamAllyTeamID" class="anchor-heading" aria-labelledby="Spring.GetTeamAllyTeamID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamAllyTeamID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamResources">
+          <a href="#Spring.GetTeamResources" class="anchor-heading" aria-labelledby="Spring.GetTeamResources">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamResources()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamUnitStats">
+          <a href="#Spring.GetTeamUnitStats" class="anchor-heading" aria-labelledby="Spring.GetTeamUnitStats">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamUnitStats()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamResourceStats">
+          <a href="#Spring.GetTeamResourceStats" class="anchor-heading" aria-labelledby="Spring.GetTeamResourceStats">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamResourceStats()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamStatsHistory">
+          <a href="#Spring.GetTeamStatsHistory" class="anchor-heading" aria-labelledby="Spring.GetTeamStatsHistory">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamStatsHistory()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamLuaAI">
+          <a href="#Spring.GetTeamLuaAI" class="anchor-heading" aria-labelledby="Spring.GetTeamLuaAI">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamLuaAI()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetPlayerInfo">
+          <a href="#Spring.GetPlayerInfo" class="anchor-heading" aria-labelledby="Spring.GetPlayerInfo">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetPlayerInfo()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetPlayerControlledUnit">
+          <a href="#Spring.GetPlayerControlledUnit" class="anchor-heading" aria-labelledby="Spring.GetPlayerControlledUnit">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetPlayerControlledUnit()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetAIInfo">
+          <a href="#Spring.GetAIInfo" class="anchor-heading" aria-labelledby="Spring.GetAIInfo">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetAIInfo()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetAllyTeamInfo">
+          <a href="#Spring.GetAllyTeamInfo" class="anchor-heading" aria-labelledby="Spring.GetAllyTeamInfo">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetAllyTeamInfo()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.AreTeamsAllied">
+          <a href="#Spring.AreTeamsAllied" class="anchor-heading" aria-labelledby="Spring.AreTeamsAllied">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.AreTeamsAllied()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.ArePlayersAllied">
+          <a href="#Spring.ArePlayersAllied" class="anchor-heading" aria-labelledby="Spring.ArePlayersAllied">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.ArePlayersAllied()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetAllUnits">
+          <a href="#Spring.GetAllUnits" class="anchor-heading" aria-labelledby="Spring.GetAllUnits">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetAllUnits()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamUnits">
+          <a href="#Spring.GetTeamUnits" class="anchor-heading" aria-labelledby="Spring.GetTeamUnits">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamUnits()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamUnitsSorted">
+          <a href="#Spring.GetTeamUnitsSorted" class="anchor-heading" aria-labelledby="Spring.GetTeamUnitsSorted">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamUnitsSorted()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamUnitsCounts">
+          <a href="#Spring.GetTeamUnitsCounts" class="anchor-heading" aria-labelledby="Spring.GetTeamUnitsCounts">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamUnitsCounts()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamUnitsByDefs">
+          <a href="#Spring.GetTeamUnitsByDefs" class="anchor-heading" aria-labelledby="Spring.GetTeamUnitsByDefs">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamUnitsByDefs()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamUnitDefCount">
+          <a href="#Spring.GetTeamUnitDefCount" class="anchor-heading" aria-labelledby="Spring.GetTeamUnitDefCount">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamUnitDefCount()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamUnitCount">
+          <a href="#Spring.GetTeamUnitCount" class="anchor-heading" aria-labelledby="Spring.GetTeamUnitCount">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamUnitCount()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitsInRectangle">
+          <a href="#Spring.GetUnitsInRectangle" class="anchor-heading" aria-labelledby="Spring.GetUnitsInRectangle">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitsInRectangle()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitsInBox">
+          <a href="#Spring.GetUnitsInBox" class="anchor-heading" aria-labelledby="Spring.GetUnitsInBox">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitsInBox()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitsInCylinder">
+          <a href="#Spring.GetUnitsInCylinder" class="anchor-heading" aria-labelledby="Spring.GetUnitsInCylinder">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitsInCylinder()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitsInSphere">
+          <a href="#Spring.GetUnitsInSphere" class="anchor-heading" aria-labelledby="Spring.GetUnitsInSphere">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitsInSphere()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitsInPlanes">
+          <a href="#Spring.GetUnitsInPlanes" class="anchor-heading" aria-labelledby="Spring.GetUnitsInPlanes">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitsInPlanes()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitNearestAlly">
+          <a href="#Spring.GetUnitNearestAlly" class="anchor-heading" aria-labelledby="Spring.GetUnitNearestAlly">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitNearestAlly()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitNearestEnemy">
+          <a href="#Spring.GetUnitNearestEnemy" class="anchor-heading" aria-labelledby="Spring.GetUnitNearestEnemy">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitNearestEnemy()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturesInRectangle">
+          <a href="#Spring.GetFeaturesInRectangle" class="anchor-heading" aria-labelledby="Spring.GetFeaturesInRectangle">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturesInRectangle()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturesInSphere">
+          <a href="#Spring.GetFeaturesInSphere" class="anchor-heading" aria-labelledby="Spring.GetFeaturesInSphere">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturesInSphere()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturesInCylinder">
+          <a href="#Spring.GetFeaturesInCylinder" class="anchor-heading" aria-labelledby="Spring.GetFeaturesInCylinder">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturesInCylinder()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectilesInRectangle">
+          <a href="#Spring.GetProjectilesInRectangle" class="anchor-heading" aria-labelledby="Spring.GetProjectilesInRectangle">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectilesInRectangle()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.ValidUnitID">
+          <a href="#Spring.ValidUnitID" class="anchor-heading" aria-labelledby="Spring.ValidUnitID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.ValidUnitID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitStates">
+          <a href="#Spring.GetUnitStates" class="anchor-heading" aria-labelledby="Spring.GetUnitStates">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitStates()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitArmored">
+          <a href="#Spring.GetUnitArmored" class="anchor-heading" aria-labelledby="Spring.GetUnitArmored">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitArmored()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitIsActive">
+          <a href="#Spring.GetUnitIsActive" class="anchor-heading" aria-labelledby="Spring.GetUnitIsActive">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitIsActive()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitIsCloaked">
+          <a href="#Spring.GetUnitIsCloaked" class="anchor-heading" aria-labelledby="Spring.GetUnitIsCloaked">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitIsCloaked()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitSelfDTime">
+          <a href="#Spring.GetUnitSelfDTime" class="anchor-heading" aria-labelledby="Spring.GetUnitSelfDTime">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitSelfDTime()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitStockpile">
+          <a href="#Spring.GetUnitStockpile" class="anchor-heading" aria-labelledby="Spring.GetUnitStockpile">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitStockpile()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitSensorRadius">
+          <a href="#Spring.GetUnitSensorRadius" class="anchor-heading" aria-labelledby="Spring.GetUnitSensorRadius">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitSensorRadius()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitPosErrorParams">
+          <a href="#Spring.GetUnitPosErrorParams" class="anchor-heading" aria-labelledby="Spring.GetUnitPosErrorParams">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitPosErrorParams()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitTooltip">
+          <a href="#Spring.GetUnitTooltip" class="anchor-heading" aria-labelledby="Spring.GetUnitTooltip">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitTooltip()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitDefID">
+          <a href="#Spring.GetUnitDefID" class="anchor-heading" aria-labelledby="Spring.GetUnitDefID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitDefID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitTeam">
+          <a href="#Spring.GetUnitTeam" class="anchor-heading" aria-labelledby="Spring.GetUnitTeam">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitTeam()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitAllyTeam">
+          <a href="#Spring.GetUnitAllyTeam" class="anchor-heading" aria-labelledby="Spring.GetUnitAllyTeam">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitAllyTeam()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitNeutral">
+          <a href="#Spring.GetUnitNeutral" class="anchor-heading" aria-labelledby="Spring.GetUnitNeutral">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitNeutral()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitHealth">
+          <a href="#Spring.GetUnitHealth" class="anchor-heading" aria-labelledby="Spring.GetUnitHealth">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitHealth()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitIsDead">
+          <a href="#Spring.GetUnitIsDead" class="anchor-heading" aria-labelledby="Spring.GetUnitIsDead">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitIsDead()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitIsStunned">
+          <a href="#Spring.GetUnitIsStunned" class="anchor-heading" aria-labelledby="Spring.GetUnitIsStunned">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitIsStunned()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitResources">
+          <a href="#Spring.GetUnitResources" class="anchor-heading" aria-labelledby="Spring.GetUnitResources">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitResources()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitMetalExtraction">
+          <a href="#Spring.GetUnitMetalExtraction" class="anchor-heading" aria-labelledby="Spring.GetUnitMetalExtraction">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitMetalExtraction()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitExperience">
+          <a href="#Spring.GetUnitExperience" class="anchor-heading" aria-labelledby="Spring.GetUnitExperience">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitExperience()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitHeight">
+          <a href="#Spring.GetUnitHeight" class="anchor-heading" aria-labelledby="Spring.GetUnitHeight">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitHeight()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitRadius">
+          <a href="#Spring.GetUnitRadius" class="anchor-heading" aria-labelledby="Spring.GetUnitRadius">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitRadius()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitMass">
+          <a href="#Spring.GetUnitMass" class="anchor-heading" aria-labelledby="Spring.GetUnitMass">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitMass()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitPosition">
+          <a href="#Spring.GetUnitPosition" class="anchor-heading" aria-labelledby="Spring.GetUnitPosition">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitPosition()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitBasePosition">
+          <a href="#Spring.GetUnitBasePosition" class="anchor-heading" aria-labelledby="Spring.GetUnitBasePosition">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitBasePosition()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitVectors">
+          <a href="#Spring.GetUnitVectors" class="anchor-heading" aria-labelledby="Spring.GetUnitVectors">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitVectors()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitRotation">
+          <a href="#Spring.GetUnitRotation" class="anchor-heading" aria-labelledby="Spring.GetUnitRotation">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitRotation()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitDirection">
+          <a href="#Spring.GetUnitDirection" class="anchor-heading" aria-labelledby="Spring.GetUnitDirection">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitDirection()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitHeading">
+          <a href="#Spring.GetUnitHeading" class="anchor-heading" aria-labelledby="Spring.GetUnitHeading">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitHeading()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitVelocity">
+          <a href="#Spring.GetUnitVelocity" class="anchor-heading" aria-labelledby="Spring.GetUnitVelocity">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitVelocity()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitBuildFacing">
+          <a href="#Spring.GetUnitBuildFacing" class="anchor-heading" aria-labelledby="Spring.GetUnitBuildFacing">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitBuildFacing()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitIsBuilding">
+          <a href="#Spring.GetUnitIsBuilding" class="anchor-heading" aria-labelledby="Spring.GetUnitIsBuilding">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitIsBuilding()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitCurrentBuildPower">
+          <a href="#Spring.GetUnitCurrentBuildPower" class="anchor-heading" aria-labelledby="Spring.GetUnitCurrentBuildPower">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitCurrentBuildPower()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitHarvestStorage">
+          <a href="#Spring.GetUnitHarvestStorage" class="anchor-heading" aria-labelledby="Spring.GetUnitHarvestStorage">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitHarvestStorage()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitBuildParams">
+          <a href="#Spring.GetUnitBuildParams" class="anchor-heading" aria-labelledby="Spring.GetUnitBuildParams">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitBuildParams()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitInBuildStance">
+          <a href="#Spring.GetUnitInBuildStance" class="anchor-heading" aria-labelledby="Spring.GetUnitInBuildStance">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitInBuildStance()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitNanoPieces">
+          <a href="#Spring.GetUnitNanoPieces" class="anchor-heading" aria-labelledby="Spring.GetUnitNanoPieces">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitNanoPieces()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitTransporter">
+          <a href="#Spring.GetUnitTransporter" class="anchor-heading" aria-labelledby="Spring.GetUnitTransporter">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitTransporter()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitIsTransporting">
+          <a href="#Spring.GetUnitIsTransporting" class="anchor-heading" aria-labelledby="Spring.GetUnitIsTransporting">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitIsTransporting()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitShieldState">
+          <a href="#Spring.GetUnitShieldState" class="anchor-heading" aria-labelledby="Spring.GetUnitShieldState">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitShieldState()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitFlanking">
+          <a href="#Spring.GetUnitFlanking" class="anchor-heading" aria-labelledby="Spring.GetUnitFlanking">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitFlanking()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitMaxRange">
+          <a href="#Spring.GetUnitMaxRange" class="anchor-heading" aria-labelledby="Spring.GetUnitMaxRange">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitMaxRange()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitWeaponState">
+          <a href="#Spring.GetUnitWeaponState" class="anchor-heading" aria-labelledby="Spring.GetUnitWeaponState">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitWeaponState()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitWeaponDamages">
+          <a href="#Spring.GetUnitWeaponDamages" class="anchor-heading" aria-labelledby="Spring.GetUnitWeaponDamages">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitWeaponDamages()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitWeaponVectors">
+          <a href="#Spring.GetUnitWeaponVectors" class="anchor-heading" aria-labelledby="Spring.GetUnitWeaponVectors">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitWeaponVectors()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitWeaponTryTarget">
+          <a href="#Spring.GetUnitWeaponTryTarget" class="anchor-heading" aria-labelledby="Spring.GetUnitWeaponTryTarget">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitWeaponTryTarget()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitWeaponTestTarget">
+          <a href="#Spring.GetUnitWeaponTestTarget" class="anchor-heading" aria-labelledby="Spring.GetUnitWeaponTestTarget">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitWeaponTestTarget()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitWeaponTestRange">
+          <a href="#Spring.GetUnitWeaponTestRange" class="anchor-heading" aria-labelledby="Spring.GetUnitWeaponTestRange">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitWeaponTestRange()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitWeaponHaveFreeLineOfFire">
+          <a href="#Spring.GetUnitWeaponHaveFreeLineOfFire" class="anchor-heading" aria-labelledby="Spring.GetUnitWeaponHaveFreeLineOfFire">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitWeaponHaveFreeLineOfFire()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitWeaponCanFire">
+          <a href="#Spring.GetUnitWeaponCanFire" class="anchor-heading" aria-labelledby="Spring.GetUnitWeaponCanFire">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitWeaponCanFire()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitWeaponTarget">
+          <a href="#Spring.GetUnitWeaponTarget" class="anchor-heading" aria-labelledby="Spring.GetUnitWeaponTarget">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitWeaponTarget()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitEstimatedPath">
+          <a href="#Spring.GetUnitEstimatedPath" class="anchor-heading" aria-labelledby="Spring.GetUnitEstimatedPath">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitEstimatedPath()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitLastAttacker">
+          <a href="#Spring.GetUnitLastAttacker" class="anchor-heading" aria-labelledby="Spring.GetUnitLastAttacker">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitLastAttacker()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitLastAttackedPiece">
+          <a href="#Spring.GetUnitLastAttackedPiece" class="anchor-heading" aria-labelledby="Spring.GetUnitLastAttackedPiece">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitLastAttackedPiece()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitCollisionVolumeData">
+          <a href="#Spring.GetUnitCollisionVolumeData" class="anchor-heading" aria-labelledby="Spring.GetUnitCollisionVolumeData">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitCollisionVolumeData()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitSeparation">
+          <a href="#Spring.GetUnitSeparation" class="anchor-heading" aria-labelledby="Spring.GetUnitSeparation">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitSeparation()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitFeatureSeparation">
+          <a href="#Spring.GetUnitFeatureSeparation" class="anchor-heading" aria-labelledby="Spring.GetUnitFeatureSeparation">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitFeatureSeparation()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitDefDimensions">
+          <a href="#Spring.GetUnitDefDimensions" class="anchor-heading" aria-labelledby="Spring.GetUnitDefDimensions">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitDefDimensions()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetCEGID">
+          <a href="#Spring.GetCEGID" class="anchor-heading" aria-labelledby="Spring.GetCEGID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetCEGID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitBlocking">
+          <a href="#Spring.GetUnitBlocking" class="anchor-heading" aria-labelledby="Spring.GetUnitBlocking">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitBlocking()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitMoveTypeData">
+          <a href="#Spring.GetUnitMoveTypeData" class="anchor-heading" aria-labelledby="Spring.GetUnitMoveTypeData">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitMoveTypeData()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitCurrentCommand">
+          <a href="#Spring.GetUnitCurrentCommand" class="anchor-heading" aria-labelledby="Spring.GetUnitCurrentCommand">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitCurrentCommand()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitCommands">
+          <a href="#Spring.GetUnitCommands" class="anchor-heading" aria-labelledby="Spring.GetUnitCommands">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitCommands()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFactoryCommands">
+          <a href="#Spring.GetFactoryCommands" class="anchor-heading" aria-labelledby="Spring.GetFactoryCommands">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFactoryCommands()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFactoryBuggerOff">
+          <a href="#Spring.GetFactoryBuggerOff" class="anchor-heading" aria-labelledby="Spring.GetFactoryBuggerOff">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFactoryBuggerOff()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFactoryCounts">
+          <a href="#Spring.GetFactoryCounts" class="anchor-heading" aria-labelledby="Spring.GetFactoryCounts">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFactoryCounts()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetCommandQueue">
+          <a href="#Spring.GetCommandQueue" class="anchor-heading" aria-labelledby="Spring.GetCommandQueue">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetCommandQueue()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFullBuildQueue">
+          <a href="#Spring.GetFullBuildQueue" class="anchor-heading" aria-labelledby="Spring.GetFullBuildQueue">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFullBuildQueue()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetRealBuildQueue">
+          <a href="#Spring.GetRealBuildQueue" class="anchor-heading" aria-labelledby="Spring.GetRealBuildQueue">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetRealBuildQueue()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitCmdDescs">
+          <a href="#Spring.GetUnitCmdDescs" class="anchor-heading" aria-labelledby="Spring.GetUnitCmdDescs">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitCmdDescs()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.FindUnitCmdDesc">
+          <a href="#Spring.FindUnitCmdDesc" class="anchor-heading" aria-labelledby="Spring.FindUnitCmdDesc">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.FindUnitCmdDesc()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.ValidFeatureID">
+          <a href="#Spring.ValidFeatureID" class="anchor-heading" aria-labelledby="Spring.ValidFeatureID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.ValidFeatureID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetAllFeatures">
+          <a href="#Spring.GetAllFeatures" class="anchor-heading" aria-labelledby="Spring.GetAllFeatures">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetAllFeatures()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureDefID">
+          <a href="#Spring.GetFeatureDefID" class="anchor-heading" aria-labelledby="Spring.GetFeatureDefID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureDefID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureTeam">
+          <a href="#Spring.GetFeatureTeam" class="anchor-heading" aria-labelledby="Spring.GetFeatureTeam">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureTeam()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureAllyTeam">
+          <a href="#Spring.GetFeatureAllyTeam" class="anchor-heading" aria-labelledby="Spring.GetFeatureAllyTeam">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureAllyTeam()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureHealth">
+          <a href="#Spring.GetFeatureHealth" class="anchor-heading" aria-labelledby="Spring.GetFeatureHealth">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureHealth()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureHeight">
+          <a href="#Spring.GetFeatureHeight" class="anchor-heading" aria-labelledby="Spring.GetFeatureHeight">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureHeight()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureRadius">
+          <a href="#Spring.GetFeatureRadius" class="anchor-heading" aria-labelledby="Spring.GetFeatureRadius">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureRadius()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureMass">
+          <a href="#Spring.GetFeatureMass" class="anchor-heading" aria-labelledby="Spring.GetFeatureMass">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureMass()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturePosition">
+          <a href="#Spring.GetFeaturePosition" class="anchor-heading" aria-labelledby="Spring.GetFeaturePosition">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturePosition()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureSeparation">
+          <a href="#Spring.GetFeatureSeparation" class="anchor-heading" aria-labelledby="Spring.GetFeatureSeparation">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureSeparation()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureRotation">
+          <a href="#Spring.GetFeatureRotation" class="anchor-heading" aria-labelledby="Spring.GetFeatureRotation">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureRotation()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureDirection">
+          <a href="#Spring.GetFeatureDirection" class="anchor-heading" aria-labelledby="Spring.GetFeatureDirection">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureDirection()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureVelocity">
+          <a href="#Spring.GetFeatureVelocity" class="anchor-heading" aria-labelledby="Spring.GetFeatureVelocity">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureVelocity()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureHeading">
+          <a href="#Spring.GetFeatureHeading" class="anchor-heading" aria-labelledby="Spring.GetFeatureHeading">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureHeading()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureResources">
+          <a href="#Spring.GetFeatureResources" class="anchor-heading" aria-labelledby="Spring.GetFeatureResources">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureResources()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureBlocking">
+          <a href="#Spring.GetFeatureBlocking" class="anchor-heading" aria-labelledby="Spring.GetFeatureBlocking">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureBlocking()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureNoSelect">
+          <a href="#Spring.GetFeatureNoSelect" class="anchor-heading" aria-labelledby="Spring.GetFeatureNoSelect">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureNoSelect()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureResurrect">
+          <a href="#Spring.GetFeatureResurrect" class="anchor-heading" aria-labelledby="Spring.GetFeatureResurrect">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureResurrect()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureLastAttackedPiece">
+          <a href="#Spring.GetFeatureLastAttackedPiece" class="anchor-heading" aria-labelledby="Spring.GetFeatureLastAttackedPiece">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureLastAttackedPiece()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureCollisionVolumeData">
+          <a href="#Spring.GetFeatureCollisionVolumeData" class="anchor-heading" aria-labelledby="Spring.GetFeatureCollisionVolumeData">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureCollisionVolumeData()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturePieceCollisionVolumeData">
+          <a href="#Spring.GetFeaturePieceCollisionVolumeData" class="anchor-heading" aria-labelledby="Spring.GetFeaturePieceCollisionVolumeData">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturePieceCollisionVolumeData()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectilePosition">
+          <a href="#Spring.GetProjectilePosition" class="anchor-heading" aria-labelledby="Spring.GetProjectilePosition">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectilePosition()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileDirection">
+          <a href="#Spring.GetProjectileDirection" class="anchor-heading" aria-labelledby="Spring.GetProjectileDirection">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileDirection()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileVelocity">
+          <a href="#Spring.GetProjectileVelocity" class="anchor-heading" aria-labelledby="Spring.GetProjectileVelocity">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileVelocity()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileGravity">
+          <a href="#Spring.GetProjectileGravity" class="anchor-heading" aria-labelledby="Spring.GetProjectileGravity">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileGravity()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetPieceProjectileParams">
+          <a href="#Spring.GetPieceProjectileParams" class="anchor-heading" aria-labelledby="Spring.GetPieceProjectileParams">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetPieceProjectileParams()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileTarget">
+          <a href="#Spring.GetProjectileTarget" class="anchor-heading" aria-labelledby="Spring.GetProjectileTarget">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileTarget()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileIsIntercepted">
+          <a href="#Spring.GetProjectileIsIntercepted" class="anchor-heading" aria-labelledby="Spring.GetProjectileIsIntercepted">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileIsIntercepted()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileTimeToLive">
+          <a href="#Spring.GetProjectileTimeToLive" class="anchor-heading" aria-labelledby="Spring.GetProjectileTimeToLive">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileTimeToLive()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileOwnerID">
+          <a href="#Spring.GetProjectileOwnerID" class="anchor-heading" aria-labelledby="Spring.GetProjectileOwnerID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileOwnerID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileTeamID">
+          <a href="#Spring.GetProjectileTeamID" class="anchor-heading" aria-labelledby="Spring.GetProjectileTeamID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileTeamID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileAllyTeamID">
+          <a href="#Spring.GetProjectileAllyTeamID" class="anchor-heading" aria-labelledby="Spring.GetProjectileAllyTeamID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileAllyTeamID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileType">
+          <a href="#Spring.GetProjectileType" class="anchor-heading" aria-labelledby="Spring.GetProjectileType">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileType()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileDefID">
+          <a href="#Spring.GetProjectileDefID" class="anchor-heading" aria-labelledby="Spring.GetProjectileDefID">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileDefID()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileDamages">
+          <a href="#Spring.GetProjectileDamages" class="anchor-heading" aria-labelledby="Spring.GetProjectileDamages">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileDamages()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetProjectileName">
+          <a href="#Spring.GetProjectileName" class="anchor-heading" aria-labelledby="Spring.GetProjectileName">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetProjectileName()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGroundHeight">
+          <a href="#Spring.GetGroundHeight" class="anchor-heading" aria-labelledby="Spring.GetGroundHeight">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGroundHeight()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGroundOrigHeight">
+          <a href="#Spring.GetGroundOrigHeight" class="anchor-heading" aria-labelledby="Spring.GetGroundOrigHeight">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGroundOrigHeight()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGroundNormal">
+          <a href="#Spring.GetGroundNormal" class="anchor-heading" aria-labelledby="Spring.GetGroundNormal">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGroundNormal()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGroundInfo">
+          <a href="#Spring.GetGroundInfo" class="anchor-heading" aria-labelledby="Spring.GetGroundInfo">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGroundInfo()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGroundBlocked">
+          <a href="#Spring.GetGroundBlocked" class="anchor-heading" aria-labelledby="Spring.GetGroundBlocked">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGroundBlocked()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGroundExtremes">
+          <a href="#Spring.GetGroundExtremes" class="anchor-heading" aria-labelledby="Spring.GetGroundExtremes">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGroundExtremes()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTerrainTypeData">
+          <a href="#Spring.GetTerrainTypeData" class="anchor-heading" aria-labelledby="Spring.GetTerrainTypeData">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTerrainTypeData()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGrass">
+          <a href="#Spring.GetGrass" class="anchor-heading" aria-labelledby="Spring.GetGrass">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGrass()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetSmoothMeshHeight">
+          <a href="#Spring.GetSmoothMeshHeight" class="anchor-heading" aria-labelledby="Spring.GetSmoothMeshHeight">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetSmoothMeshHeight()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.TestMoveOrder">
+          <a href="#Spring.TestMoveOrder" class="anchor-heading" aria-labelledby="Spring.TestMoveOrder">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.TestMoveOrder()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.TestBuildOrder">
+          <a href="#Spring.TestBuildOrder" class="anchor-heading" aria-labelledby="Spring.TestBuildOrder">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.TestBuildOrder()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.Pos2BuildPos">
+          <a href="#Spring.Pos2BuildPos" class="anchor-heading" aria-labelledby="Spring.Pos2BuildPos">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.Pos2BuildPos()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.ClosestBuildPos">
+          <a href="#Spring.ClosestBuildPos" class="anchor-heading" aria-labelledby="Spring.ClosestBuildPos">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.ClosestBuildPos()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetPositionLosState">
+          <a href="#Spring.GetPositionLosState" class="anchor-heading" aria-labelledby="Spring.GetPositionLosState">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetPositionLosState()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsPosInLos">
+          <a href="#Spring.IsPosInLos" class="anchor-heading" aria-labelledby="Spring.IsPosInLos">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsPosInLos()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsPosInRadar">
+          <a href="#Spring.IsPosInRadar" class="anchor-heading" aria-labelledby="Spring.IsPosInRadar">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsPosInRadar()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsPosInAirLos">
+          <a href="#Spring.IsPosInAirLos" class="anchor-heading" aria-labelledby="Spring.IsPosInAirLos">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsPosInAirLos()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitLosState">
+          <a href="#Spring.GetUnitLosState" class="anchor-heading" aria-labelledby="Spring.GetUnitLosState">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitLosState()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsUnitInLos">
+          <a href="#Spring.IsUnitInLos" class="anchor-heading" aria-labelledby="Spring.IsUnitInLos">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsUnitInLos(unitID, allyTeamID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>allyTeamID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              inLos</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsUnitInAirLos">
+          <a href="#Spring.IsUnitInAirLos" class="anchor-heading" aria-labelledby="Spring.IsUnitInAirLos">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsUnitInAirLos(unitID, allyTeamID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>allyTeamID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              inAirLos</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsUnitInRadar">
+          <a href="#Spring.IsUnitInRadar" class="anchor-heading" aria-labelledby="Spring.IsUnitInRadar">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsUnitInRadar(unitID, allyTeamID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>allyTeamID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              inRadar</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsUnitInJammer">
+          <a href="#Spring.IsUnitInJammer" class="anchor-heading" aria-labelledby="Spring.IsUnitInJammer">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsUnitInJammer(unitID, allyTeamID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>allyTeamID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              inJammer</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetRadarErrorParams">
+          <a href="#Spring.GetRadarErrorParams" class="anchor-heading" aria-labelledby="Spring.GetRadarErrorParams">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetRadarErrorParams(allyTeamID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>allyTeamID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span> or <span class="type">number</span></strong>
+              radarErrorSize actual radar error size (when allyTeamID is allied to current team) or base radar error size</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              baseRadarErrorSize</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              baseRadarErrorMult</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+      <h2 id="Game_States" class="section-header has-description">
+        <a href="#Game_States" class="anchor-heading" aria-labelledby="Game_States">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Game States
+      </h2>
+
+        <p>
+
+<hr/>
+</p>
+        <h3 id="Spring.IsCheatingEnabled">
+          <a href="#Spring.IsCheatingEnabled" class="anchor-heading" aria-labelledby="Spring.IsCheatingEnabled">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsCheatingEnabled()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              enabled</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsGodModeEnabled">
+          <a href="#Spring.IsGodModeEnabled" class="anchor-heading" aria-labelledby="Spring.IsGodModeEnabled">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsGodModeEnabled()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              enabled</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsDevLuaEnabled">
+          <a href="#Spring.IsDevLuaEnabled" class="anchor-heading" aria-labelledby="Spring.IsDevLuaEnabled">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsDevLuaEnabled()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              enabled</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsEditDefsEnabled">
+          <a href="#Spring.IsEditDefsEnabled" class="anchor-heading" aria-labelledby="Spring.IsEditDefsEnabled">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsEditDefsEnabled()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              enabled</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsNoCostEnabled">
+          <a href="#Spring.IsNoCostEnabled" class="anchor-heading" aria-labelledby="Spring.IsNoCostEnabled">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsNoCostEnabled()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              enabled</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGlobalLos">
+          <a href="#Spring.GetGlobalLos" class="anchor-heading" aria-labelledby="Spring.GetGlobalLos">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGlobalLos([teamID])
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>teamID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                   (<em>optional</em>)
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              enabled</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.AreHelperAIsEnabled">
+          <a href="#Spring.AreHelperAIsEnabled" class="anchor-heading" aria-labelledby="Spring.AreHelperAIsEnabled">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.AreHelperAIsEnabled()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              enabled</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.FixedAllies">
+          <a href="#Spring.FixedAllies" class="anchor-heading" aria-labelledby="Spring.FixedAllies">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.FixedAllies()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span> or <span class="type">nil</span></strong>
+              enabled</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.IsGameOver">
+          <a href="#Spring.IsGameOver" class="anchor-heading" aria-labelledby="Spring.IsGameOver">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.IsGameOver()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">bool</span></strong>
+              isGameOver</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+      <h2 id="Speed_Time" class="section-header has-description">
+        <a href="#Speed_Time" class="anchor-heading" aria-labelledby="Speed_Time">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Speed/Time
+      </h2>
+
+        <p>
+
+<hr/>
+</p>
+        <h3 id="Spring.GetGameFrame">
+          <a href="#Spring.GetGameFrame" class="anchor-heading" aria-labelledby="Spring.GetGameFrame">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGameFrame()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span></strong>
+              t1 frameNum % dayFrames</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              t2 frameNum / dayFrames</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGameSeconds">
+          <a href="#Spring.GetGameSeconds" class="anchor-heading" aria-labelledby="Spring.GetGameSeconds">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGameSeconds()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span></strong>
+              seconds</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+      <h2 id="Environment" class="section-header has-description">
+        <a href="#Environment" class="anchor-heading" aria-labelledby="Environment">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Environment
+      </h2>
+
+        <p>
+
+<hr/>
+</p>
+        <h3 id="Spring.GetTidal">
+          <a href="#Spring.GetTidal" class="anchor-heading" aria-labelledby="Spring.GetTidal">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTidal()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span></strong>
+              tidalStrength</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetWind">
+          <a href="#Spring.GetWind" class="anchor-heading" aria-labelledby="Spring.GetWind">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetWind()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span></strong>
+              windStrength</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+      <h2 id="Rules_Params" class="section-header has-description">
+        <a href="#Rules_Params" class="anchor-heading" aria-labelledby="Rules_Params">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Rules/Params
+      </h2>
+
+        <p>
+
+
+<p> The following functions allow to save data per game, team and unit.
+ The advantage of it is that it can be read from anywhere (even from LuaUI and AIs!)</p>
+<hr/>
+</p>
+        <h3 id="Spring.GetGameRulesParams">
+          <a href="#Spring.GetGameRulesParams" class="anchor-heading" aria-labelledby="Spring.GetGameRulesParams">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGameRulesParams()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]</a></strong>
+              = number,...} rulesParams map with rules names as key and values as values</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamRulesParams">
+          <a href="#Spring.GetTeamRulesParams" class="anchor-heading" aria-labelledby="Spring.GetTeamRulesParams">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamRulesParams(teamID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>teamID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]</a></strong>
+              = number,...} rulesParams map with rules names as key and values as values</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitRulesParams">
+          <a href="#Spring.GetUnitRulesParams" class="anchor-heading" aria-labelledby="Spring.GetUnitRulesParams">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitRulesParams(unitID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]</a></strong>
+              = number,...} rulesParams map with rules names as key and values as values</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureRulesParams">
+          <a href="#Spring.GetFeatureRulesParams" class="anchor-heading" aria-labelledby="Spring.GetFeatureRulesParams">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureRulesParams(featureID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>featureID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]</a></strong>
+              = number,...} rulesParams map with rules names as key and values as values</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetGameRulesParam">
+          <a href="#Spring.GetGameRulesParam" class="anchor-heading" aria-labelledby="Spring.GetGameRulesParam">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetGameRulesParam(ruleRef)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>ruleRef</code>
+                   <strong><span class="type">number</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+                    the rule index or name
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span>, <span class="type">number</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+              value</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetTeamRulesParam">
+          <a href="#Spring.GetTeamRulesParam" class="anchor-heading" aria-labelledby="Spring.GetTeamRulesParam">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetTeamRulesParam(teamID, ruleRef)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>teamID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>ruleRef</code>
+                   <strong><span class="type">number</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+                    the rule index or name
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span>, <span class="type">number</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+              value</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitRulesParam">
+          <a href="#Spring.GetUnitRulesParam" class="anchor-heading" aria-labelledby="Spring.GetUnitRulesParam">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitRulesParam(unitID, ruleRef)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>ruleRef</code>
+                   <strong><span class="type">number</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+                    the rule index or name
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span>, <span class="type">number</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+              value</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeatureRulesParam">
+          <a href="#Spring.GetFeatureRulesParam" class="anchor-heading" aria-labelledby="Spring.GetFeatureRulesParam">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeatureRulesParam(featureID, ruleRef)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>featureID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>ruleRef</code>
+                   <strong><span class="type">number</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+                    the rule index or name
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span>, <span class="type">number</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+              value</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+      <h2 id="Mod_and_Map_options" class="section-header has-description">
+        <a href="#Mod_and_Map_options" class="anchor-heading" aria-labelledby="Mod_and_Map_options">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Mod and Map options
+      </h2>
+
+        <p>
+
+
+<p> <em>Warning</em>: boolean values are not transfered from C to Lua correctly.
+ For this reason the respective option has to be converted to a number
+ and checked accordingly via an IF statement as shown below:</p>
+
+<pre><code> if (tonumber(Spring.GetModOptions.exampleOption) == 1) then...end
+</code></pre>
+
+<p> The following check therefore is insufficient!</p>
+
+<pre><code> if (Spring.GetModOptions.exampleOption) then...end
+</code></pre>
+<hr/>
+</p>
+        <h3 id="Spring.GetMapOptions">
+          <a href="#Spring.GetMapOptions" class="anchor-heading" aria-labelledby="Spring.GetMapOptions">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetMapOptions()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]</a></strong>
+              = string,...} options map with options names as keys and values as values</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetModOptions">
+          <a href="#Spring.GetModOptions" class="anchor-heading" aria-labelledby="Spring.GetModOptions">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetModOptions()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]</a></strong>
+              = string,...} options map with options names as keys and values as values</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+      <h2 id="Vectors" class="section-header has-description">
+        <a href="#Vectors" class="anchor-heading" aria-labelledby="Vectors">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Vectors
+      </h2>
+
+        <p>
+
+<hr/>
+</p>
+        <h3 id="Spring.GetHeadingFromVector">
+          <a href="#Spring.GetHeadingFromVector" class="anchor-heading" aria-labelledby="Spring.GetHeadingFromVector">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetHeadingFromVector(x, z)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>x</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>z</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span></strong>
+              heading</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetVectorFromHeading">
+          <a href="#Spring.GetVectorFromHeading" class="anchor-heading" aria-labelledby="Spring.GetVectorFromHeading">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetVectorFromHeading(heading)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>heading</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span></strong>
+              x</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              z</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+      <h2 id="Sides_and_Factions" class="section-header has-description">
+        <a href="#Sides_and_Factions" class="anchor-heading" aria-labelledby="Sides_and_Factions">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Sides and Factions
+      </h2>
+
+        <p>
+
+<hr/>
+</p>
+        <h3 id="sideSpec">
+          <a href="#sideSpec" class="anchor-heading" aria-labelledby="sideSpec">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          sideSpec
+        </h3>
+        <p>Side spec</p>
+        <div class="code-example">
+        <p>
+
+
+ Used when returning arrays of side specifications, is itself an array with
+ positional values as below:
+
+        </p>
+
+
+           <h4>Fields:</h4>
+           <ol>
+                 <li>
+                   <code>sideName</code>
+                   <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>caseName</code>
+                   <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>startUnit</code>
+                   <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+
+
+
+                 </li>
+           </ol>
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetSideData">
+          <a href="#Spring.GetSideData" class="anchor-heading" aria-labelledby="Spring.GetSideData">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetSideData(sideName)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>sideName</code>
+                   <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+              startUnit</li>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+              caseSensitiveSideName</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetSideData">
+          <a href="#Spring.GetSideData" class="anchor-heading" aria-labelledby="Spring.GetSideData">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetSideData(sideID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>sideID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+              sideName</li>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+              startUnit</li>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+              caseSensitiveSideName</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetSideData">
+          <a href="#Spring.GetSideData" class="anchor-heading" aria-labelledby="Spring.GetSideData">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetSideData()
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="../modules/SyncedRead.html#sideSpec">{[sideSpec],...}</a></strong>
+              sideArray</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+      <h2 id="Piece_Script" class="section-header has-description">
+        <a href="#Piece_Script" class="anchor-heading" aria-labelledby="Piece_Script">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <use xlink:href="#svg-link"></use>
+          </svg>
+        </a>
+        Piece/Script
+      </h2>
+
+        <p>
+
+<hr/>
+</p>
+        <h3 id="pieceSpec">
+          <a href="#pieceSpec" class="anchor-heading" aria-labelledby="pieceSpec">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          pieceSpec
+        </h3>
+        <p>Piece spec</p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Fields:</h4>
+           <ol>
+                 <li>
+                   <code>name</code>
+                   <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>parent</code>
+                   <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>children</code>
+                   <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string],...}</a></strong>
+                    names
+                 </li>
+                 <li>
+                   <code>empty</code>
+                   <strong><span class="type">boolean</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>min</code>
+                   <strong><span class="type">{number,number,number}</span></strong>
+                    (x,y,z)
+                 </li>
+                 <li>
+                   <code>max</code>
+                   <strong><span class="type">{number,number,number}</span></strong>
+                    (x,y,z)
+                 </li>
+                 <li>
+                   <code>offset</code>
+                   <strong><span class="type">{number,number,number}</span></strong>
+                    (x,y,z)
+                 </li>
+           </ol>
+
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetModelPieceMap">
+          <a href="#Spring.GetModelPieceMap" class="anchor-heading" aria-labelledby="Spring.GetModelPieceMap">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetModelPieceMap(modelName)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>modelName</code>
+                   <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]=number,...}</a></strong>
+              pieceInfos where keys are piece names and values are indices</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetModelPieceList">
+          <a href="#Spring.GetModelPieceList" class="anchor-heading" aria-labelledby="Spring.GetModelPieceList">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetModelPieceList(modelName)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>modelName</code>
+                   <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string],...}</a></strong>
+              pieceNames</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitPieceMap">
+          <a href="#Spring.GetUnitPieceMap" class="anchor-heading" aria-labelledby="Spring.GetUnitPieceMap">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitPieceMap(unitID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span> or <a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]=number,...}</a></strong>
+              pieceInfos where keys are piece names and values are indices</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitPieceList">
+          <a href="#Spring.GetUnitPieceList" class="anchor-heading" aria-labelledby="Spring.GetUnitPieceList">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitPieceList(unitID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string],...}</a></strong>
+              pieceNames</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitPieceInfo">
+          <a href="#Spring.GetUnitPieceInfo" class="anchor-heading" aria-labelledby="Spring.GetUnitPieceInfo">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitPieceInfo(unitID, pieceIndex)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>pieceIndex</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span> or <a class="type" href="../modules/SyncedRead.html#pieceSpec">pieceSpec</a></strong>
+              pieceInfo</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitPiecePosDir">
+          <a href="#Spring.GetUnitPiecePosDir" class="anchor-heading" aria-labelledby="Spring.GetUnitPiecePosDir">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitPiecePosDir(unitID, pieceIndex)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>pieceIndex</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span> or <span class="type">nil</span></strong>
+              posX</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              posY</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              posZ</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirX</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirY</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirZ</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitPiecePosition">
+          <a href="#Spring.GetUnitPiecePosition" class="anchor-heading" aria-labelledby="Spring.GetUnitPiecePosition">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitPiecePosition(unitID, pieceIndex)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>pieceIndex</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span> or <span class="type">nil</span></strong>
+              posX</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              posY</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              posZ</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitPieceDirection">
+          <a href="#Spring.GetUnitPieceDirection" class="anchor-heading" aria-labelledby="Spring.GetUnitPieceDirection">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitPieceDirection(unitID, pieceIndex)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>pieceIndex</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span> or <span class="type">nil</span></strong>
+              dirX</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirY</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirZ</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitPieceMatrix">
+          <a href="#Spring.GetUnitPieceMatrix" class="anchor-heading" aria-labelledby="Spring.GetUnitPieceMatrix">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitPieceMatrix(unitID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span> or <span class="type">nil</span></strong>
+              m11</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m12</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m13</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m14</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m21</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m22</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m23</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m24</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m31</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m32</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m33</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m34</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m41</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m42</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m43</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m44</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturePieceMap">
+          <a href="#Spring.GetFeaturePieceMap" class="anchor-heading" aria-labelledby="Spring.GetFeaturePieceMap">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturePieceMap(featureID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>featureID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]=number,...}</a></strong>
+              pieceInfos where keys are piece names and values are indices</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturePieceList">
+          <a href="#Spring.GetFeaturePieceList" class="anchor-heading" aria-labelledby="Spring.GetFeaturePieceList">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturePieceList(featureID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>featureID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string],...}</a></strong>
+              pieceNames</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturePieceInfo">
+          <a href="#Spring.GetFeaturePieceInfo" class="anchor-heading" aria-labelledby="Spring.GetFeaturePieceInfo">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturePieceInfo(featureID, pieceIndex)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>featureID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>pieceIndex</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">nil</span> or <a class="type" href="../modules/SyncedRead.html#pieceSpec">pieceSpec</a></strong>
+              pieceInfo</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturePiecePosDir">
+          <a href="#Spring.GetFeaturePiecePosDir" class="anchor-heading" aria-labelledby="Spring.GetFeaturePiecePosDir">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturePiecePosDir(featureID, pieceIndex)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>featureID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>pieceIndex</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span> or <span class="type">nil</span></strong>
+              posX</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              posY</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              posZ</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirX</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirY</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirZ</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturePiecePosition">
+          <a href="#Spring.GetFeaturePiecePosition" class="anchor-heading" aria-labelledby="Spring.GetFeaturePiecePosition">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturePiecePosition(featureID, pieceIndex)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>featureID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>pieceIndex</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span> or <span class="type">nil</span></strong>
+              posX</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              posY</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              posZ</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturePieceDirection">
+          <a href="#Spring.GetFeaturePieceDirection" class="anchor-heading" aria-labelledby="Spring.GetFeaturePieceDirection">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturePieceDirection(featureID, pieceIndex)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>featureID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>pieceIndex</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span> or <span class="type">nil</span></strong>
+              dirX</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirY</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              dirZ</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetFeaturePieceMatrix">
+          <a href="#Spring.GetFeaturePieceMatrix" class="anchor-heading" aria-labelledby="Spring.GetFeaturePieceMatrix">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetFeaturePieceMatrix(featureID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>featureID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">number</span> or <span class="type">nil</span></strong>
+              m11</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m12</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m13</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m14</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m21</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m22</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m23</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m24</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m31</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m32</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m33</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m34</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m41</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m42</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m43</li>
+              <li>
+                <strong><span class="type">number</span></strong>
+              m44</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitScriptPiece">
+          <a href="#Spring.GetUnitScriptPiece" class="anchor-heading" aria-labelledby="Spring.GetUnitScriptPiece">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitScriptPiece(unitID[, scriptPiece])
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+                 <li>
+                   <code>scriptPiece</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                   (<em>optional</em>)
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><span class="type">{number,...}</span> or <span class="type">number</span></strong>
+              pieceIndices when scriptPiece is not specified, pieceIndex otherwise</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+        <h3 id="Spring.GetUnitScriptNames">
+          <a href="#Spring.GetUnitScriptNames" class="anchor-heading" aria-labelledby="Spring.GetUnitScriptNames">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <use xlink:href="#svg-link"></use>
+            </svg>
+          </a>
+          Spring.GetUnitScriptNames(unitID)
+        </h3>
+        <p></p>
+        <div class="code-example">
+        <p>
+
+        </p>
+
+
+           <h4>Parameters:</h4>
+           <ol>
+                 <li>
+                   <code>unitID</code>
+                   <strong><span class="type">number</span></strong>
+
+
+
+                 </li>
+           </ol>
+
+      <h4>Returns:</h4>
+          <ol>
+              <li>
+                <strong><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">{[string]=number,...}</a></strong>
+              where keys are piece names and values are piece indices</li>
+          </ol>
+
+
+
+        </div>
+        <hr>
+
+{% endraw %}
