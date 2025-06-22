@@ -36,6 +36,16 @@ jobs:
         with:
           name: ${{github.run_id}}-library
           path: rts/Lua/library/
+      - name: Install emmylua_doc_cli
+        run: |
+          cargo install emmylua_doc_cli --version "${EMMYLUA_CLI_VERSION}" --locked
+      - name: Generate docs using emmylua_doc_cli
+        run: |
+          emmylua_doc_cli \
+            -i rts/Lua/library \
+            -o doc/site/lua-api \
+            --override-template doc/emmylua-doc-cli-template
+          git add -f doc/site/lua-api
       - name: Commit changes
         run: |
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
