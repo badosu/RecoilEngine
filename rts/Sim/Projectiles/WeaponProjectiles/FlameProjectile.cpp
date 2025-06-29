@@ -80,16 +80,18 @@ void CFlameProjectile::Draw()
 	if (!validTextures[0])
 		return;
 
-	UpdateWeaponAnimParams();
+	UpdateAnimParams();
 
 	unsigned char col[4];
 	weaponDef->visuals.colorMap->GetColor(col, curTime);
+	const auto* tex = weaponDef->visuals.texture1;
 
-	AddWeaponEffectsQuad<1>(
-		{ drawPos - camera->GetRight() * radius - camera->GetUp() * radius, weaponDef->visuals.texture1->xstart, weaponDef->visuals.texture1->ystart, col },
-		{ drawPos + camera->GetRight() * radius - camera->GetUp() * radius, weaponDef->visuals.texture1->xend,   weaponDef->visuals.texture1->ystart, col },
-		{ drawPos + camera->GetRight() * radius + camera->GetUp() * radius, weaponDef->visuals.texture1->xend,   weaponDef->visuals.texture1->yend,   col },
-		{ drawPos - camera->GetRight() * radius + camera->GetUp() * radius, weaponDef->visuals.texture1->xstart, weaponDef->visuals.texture1->yend,   col }
+	AddEffectsQuad<1>(
+		tex->pageNum,
+		{ drawPos - camera->GetRight() * radius - camera->GetUp() * radius, tex->xstart, tex->ystart, col },
+		{ drawPos + camera->GetRight() * radius - camera->GetUp() * radius, tex->xend,   tex->ystart, col },
+		{ drawPos + camera->GetRight() * radius + camera->GetUp() * radius, tex->xend,   tex->yend,   col },
+		{ drawPos - camera->GetRight() * radius + camera->GetUp() * radius, tex->xstart, tex->yend,   col }
 	);
 }
 

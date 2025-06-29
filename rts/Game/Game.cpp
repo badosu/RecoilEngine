@@ -76,6 +76,7 @@
 #include "Sim/Misc/GeometricObjects.h"
 #include "Sim/Misc/GroundBlockingObjectMap.h"
 #include "Sim/Misc/BuildingMaskMap.h"
+#include "Sim/Misc/ExtractorHandler.h"
 #include "Sim/Misc/LosHandler.h"
 #include "Sim/Misc/ModInfo.h"
 #include "Sim/Misc/InterceptHandler.h"
@@ -170,8 +171,6 @@ CR_REG_METADATA(CGame, (
 	CR_IGNORED(lastUnsyncedUpdateTime),
 	CR_IGNORED(skipLastDrawTime),
 
-	CR_IGNORED(lastActionList), //IGNORED?
-
 	CR_IGNORED(updateDeltaSeconds),
 	CR_MEMBER(totalGameTime),
 
@@ -212,10 +211,9 @@ CR_REG_METADATA(CGame, (
 	CR_MEMBER(luaGCControl),
 
 	CR_IGNORED(jobDispatcher),
-	CR_IGNORED(curKeyCodeChain),
-	CR_IGNORED(curScanCodeChain),
 	CR_IGNORED(worldDrawer),
 	CR_IGNORED(saveFileHandler),
+	CR_IGNORED(gameInputReceiver),
 
 	// Post Load
 	CR_POSTLOAD(PostLoad)
@@ -260,6 +258,7 @@ CGame::CGame(const std::string& mapFileName, const std::string& modFileName, ILo
 	// clear left-over receivers in case we reloaded
 	gameCommandConsole.ResetState();
 
+	extractorHandler.ResetState();
 	envResHandler.ResetState();
 
 	modInfo.Init(modFileName);
@@ -481,6 +480,7 @@ void CGame::Load(const std::string& mapFileName)
 		// Update height bounds and pathing after pregame or a saved game load.
 		{
 			ENTER_SYNCED_CODE();
+			extractorHandler.PostFinalizeRefresh();
 			//needed in case pre-game terraform changed the map
 			readMap->UpdateHeightBounds();
 			Watchdog::ClearTimer(WDT_LOAD);
@@ -739,8 +739,11 @@ void CGame::PreLoadRendering()
 	geometricObjects = new CGeometricObjects();
 
 	// load components that need to exist before PostLoadSimulation
-	matrixUploader.Init();
-	modelsUniformsUploader.Init();
+	modelUniformsStorage.Init();
+	//transformsMemStorage.Init(); // Add?
+
+	transformsUploader.Init();
+	modelUniformsUploader.Init();
 	worldDrawer.InitPre();
 }
 
@@ -1000,8 +1003,12 @@ void CGame::KillRendering()
 	icon::iconHandler.Kill();
 	spring::SafeDelete(geometricObjects);
 	worldDrawer.Kill();
-	matrixUploader.Kill();
-	modelsUniformsUploader.Kill();
+
+	modelUniformsStorage.Kill();
+	//transformsMemStorage.Kill(); //Add?
+
+	transformsUploader.Kill();
+	modelUniformsUploader.Kill();
 }
 
 void CGame::KillInterface()
@@ -1103,89 +1110,21 @@ void CGame::ResizeEvent()
 	}
 }
 
-
 int CGame::KeyPressed(int keyCode, int scanCode, bool isRepeat)
 {
-	RECOIL_DETAILED_TRACY_ZONE;
-	if (!gameOver && !isRepeat)
-		playerHandler.Player(gu->myPlayerNum)->currentStats.keyPresses++;
-
-	const CKeySet kc(keyCode, CKeySet::KSKeyCode);
-	const CKeySet ks(scanCode, CKeySet::KSScanCode);
-
-	curKeyCodeChain.push_back(kc, spring_gettime(), isRepeat);
-	curScanCodeChain.push_back(ks, spring_gettime(), isRepeat);
-
-	lastActionList = keyBindings.GetActionList(curKeyCodeChain, curScanCodeChain);
-
-	if (RmlGui::ProcessKeyPressed(keyCode, scanCode, isRepeat))
-		return 0;
-
-	if (gameTextInput.ConsumePressedKey(keyCode, scanCode, lastActionList))
-		return 0;
-
-	if (luaInputReceiver->KeyPressed(keyCode, scanCode, isRepeat))
-		return 0;
-
-
-	// try the input receivers
-	for (CInputReceiver* recv: CInputReceiver::GetReceivers()) {
-		if (recv != nullptr && recv->KeyPressed(keyCode, scanCode, isRepeat))
-			return 0;
-	}
-
-	// try our list of actions
-	for (const Action& action: lastActionList) {
-		if (ActionPressed(action, isRepeat)) {
-			return 0;
-		}
-	}
-
-	// maybe a widget is interested?
-	if (luaUI != nullptr) {
-		for (const Action& action: lastActionList) {
-			luaUI->GotChatMsg(action.rawline, false);
-		}
-	}
-
-	if (luaMenu != nullptr) {
-		for (const Action& action: lastActionList) {
-			luaMenu->GotChatMsg(action.rawline, false);
-		}
-	}
-
+	gameInputReceiver.KeyPressed(keyCode, scanCode, isRepeat);
 	return 0;
 }
 
-
 int CGame::KeyReleased(int keyCode, int scanCode)
 {
-	RECOIL_DETAILED_TRACY_ZONE;
-	if (RmlGui::ProcessKeyReleased(keyCode, scanCode))
-		return 0;
-
-	if (gameTextInput.ConsumeReleasedKey(keyCode, scanCode))
-		return 0;
-
-	// update actionlist for lua consumer
-	lastActionList = keyBindings.GetActionList(keyCode, scanCode);
-
-	if (luaInputReceiver->KeyReleased(keyCode, scanCode))
-		return 0;
-
-	// try the input receivers
-	for (CInputReceiver* recv: CInputReceiver::GetReceivers()) {
-		if (recv != nullptr && recv->KeyReleased(keyCode, scanCode)) {
-			return 0;
-		}
-	}
-
-	for (const Action& action: lastActionList) {
-		if (ActionReleased(action))
-			return 0;
-	}
-
+	gameInputReceiver.KeyReleased(keyCode, scanCode);
 	return 0;
+}
+
+CInputReceiver* CGame::GetInputReceiver()
+{
+	return &gameInputReceiver;
 }
 
 int CGame::KeyMapChanged()
@@ -1473,8 +1412,8 @@ bool CGame::UpdateUnsynced(const spring_time currentTime)
 	shadowHandler.Update();
 	{
 		worldDrawer.Update(newSimFrame);
-		matrixUploader.Update();
-		modelsUniformsUploader.Update();
+		transformsUploader.Update();
+		modelUniformsUploader.Update();
 	}
 
 	mouse->UpdateCursorCameraDir(); // make sure mouse->dir is in sync with camera
@@ -1804,6 +1743,11 @@ void CGame::SimFrame() {
 	{
 		SCOPED_SPECIAL_TIMER("Sim");
 
+		// Lua unit scripts change piece positions and orientations in eventHandler.GameFrame(gs->frameNum);
+		// so we need to save the previous unit state before it happened
+		unitHandler.UpdatePreFrame();
+		featureHandler.UpdatePreFrame();
+
 		{
 			SCOPED_TIMER("Sim::GameFrame");
 
@@ -1834,6 +1778,8 @@ void CGame::SimFrame() {
 
 			SCOPED_TIMER("Sim::Script");
 			unitScriptEngine->Tick(tickMs);
+
+			unitHandler.UpdatePostAnimation();
 		}
 		envResHandler.Update();
 		losHandler->Update();
@@ -1846,6 +1792,9 @@ void CGame::SimFrame() {
 		teamHandler.GameFrame(gs->frameNum);
 		playerHandler.GameFrame(gs->frameNum);
 		eventHandler.GameFramePost(gs->frameNum);
+
+		unitHandler.UpdatePostFrame();
+		featureHandler.UpdatePostFrame();
 	}
 
 	lastSimFrameTime = spring_gettime();
@@ -2253,3 +2202,9 @@ bool CGame::ActionReleased(const Action& action)
 {
 	return unsyncedGameCommands->ActionReleased(action);
 }
+
+const ActionList& CGame::GetLastActionList()
+{
+	return gameInputReceiver.lastActionList;
+}
+

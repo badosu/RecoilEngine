@@ -83,8 +83,11 @@
 CONFIG(bool, LuaShaders).defaultValue(true).headlessValue(false).safemodeValue(false);
 CONFIG(int, DeprecatedGLWarnLevel).defaultValue(0).headlessValue(0).safemodeValue(0);
 
-/***
- * Lua OpenGL API
+/*** Callouts for OpenGL API
+ *
+ * Only setters and getters for OpenGL usage in Recoil, see `GL` for constants.
+ *
+ * @see GL
  * @table gl
  */
 
@@ -133,6 +136,8 @@ std::unordered_map<GLenum, std::string> LuaOpenGL::fixedStateEnumToString = {
 
 		FillFixedStateEnumToString(GL_FLAT),
 		FillFixedStateEnumToString(GL_SMOOTH),
+
+		FillFixedStateEnumToString(GL_POINT_SMOOTH),
 
 		FillFixedStateEnumToString(GL_FRONT),
 		FillFixedStateEnumToString(GL_BACK),
@@ -1248,7 +1253,7 @@ int LuaOpenGL::GetViewRange(lua_State* L)
 
 
 /***
- * @function gl.SetSlaveMode
+ * @function gl.SlaveMiniMap
  * @param newMode boolean
  */
 int LuaOpenGL::SlaveMiniMap(lua_State* L)
@@ -1324,13 +1329,26 @@ int LuaOpenGL::DrawMiniMap(lua_State* L)
 ******************************************************************************/
 
 
-/***
+/*** Begin a block of text commands.
+ *
  * @function gl.BeginText
+ *
+ * Text can be drawn without Start/End, but when doing several operations it's more optimal
+ * if done inside a block.
+ *
+ * Also allows disabling automatic setting of the blend mode. Otherwise the font will always print
+ * with `BlendFunc(GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA)`.
+ *
+ * @param userDefinedBlending boolean? When `true` doesn't set the gl.BlendFunc automatically. Defaults to `false`.
+ *
+ * @see gl.BlendFunc
+ * @see gl.BlendFuncSeparate
  */
 int LuaOpenGL::BeginText(lua_State* L)
 {
 	CheckDrawingEnabled(L, __func__);
-	font->Begin();
+	auto userDefinedBlending = luaL_optboolean(L, 2, false);
+	font->Begin(userDefinedBlending);
 	return 0;
 }
 
@@ -4759,10 +4777,10 @@ int LuaOpenGL::BindImageTexture(lua_State* L)
 	++argNum;
 	//layer
 	GLint layer = 0;
-	GLboolean layered = GL_FALSE;
+	GLboolean layered = GL_TRUE;
 	if (!lua_isnil(L, argNum)) {
 		layer = luaL_optnumber(L, argNum, 0);
-		layered = GL_TRUE;
+		layered = GL_FALSE;
 	}
 
 	++argNum;
@@ -4966,7 +4984,7 @@ int LuaOpenGL::GetAtlasTexture(lua_State* L)
 
 	const std::string subAtlasTexName = luaL_checksstring(L, 2);
 
-	AtlasedTexture atlTex = atlas->GetTexture(subAtlasTexName);
+	auto atlTex = atlas->GetTexture(subAtlasTexName);
 	if (atlTex == AtlasedTexture::DefaultAtlasTexture)
 		luaL_error(L, "gl.%s() Invalid atlas named texture specified %s", __func__, subAtlasTexName.c_str());
 
@@ -4974,7 +4992,8 @@ int LuaOpenGL::GetAtlasTexture(lua_State* L)
 	lua_pushnumber(L, atlTex.x2);
 	lua_pushnumber(L, atlTex.y1);
 	lua_pushnumber(L, atlTex.y2);
-	return 4;
+	lua_pushnumber(L, atlTex.pageNum);
+	return 5;
 }
 
 /***
@@ -6047,6 +6066,17 @@ int LuaOpenGL::GetFixedState(lua_State* L)
 			lua_pushnumber(L, pointSize);
 
 			return 2;
+		} break;
+		case hashString("pointSmooth"):
+		case hashString("pointsmooth"): {
+			CondWarnDeprecatedGL(L, __func__);
+
+			GLboolean pointSmoothFlag;
+
+			glGetBooleanv(GL_POINT_SMOOTH, &pointSmoothFlag);
+			lua_pushnumber(L, pointSmoothFlag);
+
+			return 1;
 		} break;
 		default: {
 			luaL_error(L, "Incorrect first argument (%s) to gl.GetFixedState", param);

@@ -47,6 +47,7 @@
 #include "Net/GameServer.h"
 #include "Net/Protocol/NetProtocol.h" // clientNet
 #include "Rendering/GlobalRendering.h"
+#include "Rendering/Fonts/FontHandler.h"
 #include "Rendering/Fonts/glFont.h"
 #include "Rendering/GL/FBO.h"
 #include "Rendering/Models/ModelsMemStorage.h"
@@ -340,6 +341,7 @@ bool SpringApp::InitPlatformLibs()
 
 bool SpringApp::InitFonts()
 {
+	fontHandler.Init();
 	FtLibraryHandlerProxy::InitFtLibrary();
 	FtLibraryHandlerProxy::InitFontconfig(false);
 	CFontTexture::InitFonts();
@@ -824,7 +826,7 @@ void SpringApp::Reload(const std::string script)
 
 	LOG("[SpringApp::%s][10]", __func__);
 
-	matricesMemStorage.Reset();
+	transformsMemStorage.Reset();
 	gu->ResetState();
 
 	ENTER_SYNCED_CODE();

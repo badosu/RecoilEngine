@@ -28,6 +28,7 @@
 #include "Rendering/Env/GrassDrawer.h"
 #include "Rendering/Env/IGroundDecalDrawer.h"
 #include "Rendering/Models/IModelParser.h"
+#include "Rendering/Units/UnitDrawer.h"
 #include "Sim/Features/Feature.h"
 #include "Sim/Features/FeatureDef.h"
 #include "Sim/Features/FeatureDefHandler.h"
@@ -37,6 +38,7 @@
 #include "Sim/Misc/DamageArray.h"
 #include "Sim/Misc/DamageArrayHandler.h"
 #include "Sim/Misc/LosHandler.h"
+#include "Sim/Misc/ExtractorHandler.h"
 #include "Sim/Misc/ModInfo.h"
 #include "Sim/Misc/SmoothHeightMesh.h"
 #include "Sim/Misc/Team.h"
@@ -54,6 +56,7 @@
 #include "Sim/Projectiles/WeaponProjectiles/WeaponProjectile.h"
 #include "Sim/Projectiles/WeaponProjectiles/WeaponProjectileFactory.h"
 #include "Sim/Projectiles/ProjectileHandler.h"
+#include "Sim/Units/Components/Extractor.h"
 #include "Sim/Units/Unit.h"
 #include "Sim/Units/UnitDef.h"
 #include "Sim/Units/UnitHandler.h"
@@ -67,7 +70,6 @@
 #include "Sim/Units/CommandAI/Command.h"
 #include "Sim/Units/CommandAI/CommandAI.h"
 #include "Sim/Units/CommandAI/FactoryCAI.h"
-#include "Sim/Units/UnitTypes/ExtractorBuilding.h"
 #include "Sim/Weapons/PlasmaRepulser.h"
 #include "Sim/Weapons/Weapon.h"
 #include "Sim/Weapons/WeaponDefHandler.h"
@@ -181,6 +183,7 @@ bool LuaSyncedCtrl::PushEntries(lua_State* L)
 	REGISTER_LUA_CFUNC(SetUnitStealth);
 	REGISTER_LUA_CFUNC(SetUnitSonarStealth);
 	REGISTER_LUA_CFUNC(SetUnitSeismicSignature);
+	REGISTER_LUA_CFUNC(SetUnitLeavesGhost);
 	REGISTER_LUA_CFUNC(SetUnitAlwaysVisible);
 	REGISTER_LUA_CFUNC(SetUnitUseAirLos);
 	REGISTER_LUA_CFUNC(SetUnitMetalExtraction);
@@ -2864,6 +2867,32 @@ int LuaSyncedCtrl::SetUnitSeismicSignature(lua_State* L)
 }
 
 /***
+ * @function Spring.SetUnitLeavesGhost
+ *
+ * Change the unit leavesGhost attribute.
+ *
+ * Controls unit having static radar ghosts.
+ *
+ * @number unitID
+ * @bool leavesGhost
+ * @bool[opt] leaveDeadGhost leave a dead ghost behind if disabling and the unit had a live static ghost.
+ * @treturn nil
+ */
+int LuaSyncedCtrl::SetUnitLeavesGhost(lua_State* L)
+{
+	if (!gameSetup->ghostedBuildings)
+		return 0;
+
+	CUnit* unit = ParseUnit(L, __func__, 1);
+
+	if (unit == nullptr)
+		return 0;
+
+	unit->SetLeavesGhost(luaL_checkboolean(L, 2), luaL_optboolean(L, 3, false));
+	return 0;
+}
+
+/***
  * @function Spring.SetUnitAlwaysVisible
  * @param unitID integer
  * @param alwaysVisible boolean
@@ -2902,7 +2931,7 @@ int LuaSyncedCtrl::SetUnitMetalExtraction(lua_State* L)
 	if (unit == nullptr)
 		return 0;
 
-	CExtractorBuilding* mex = dynamic_cast<CExtractorBuilding*>(unit);
+	auto mex = extractorHandler.TryGetExtractor(unit);
 
 	if (mex == nullptr)
 		return 0;
@@ -5058,24 +5087,6 @@ int LuaSyncedCtrl::SetFeaturePieceVisible(lua_State* L)
 ******************************************************************************/
 
 /***
- * @class ProjectileParams
- * @field pos float3
- * @field speed float3
- * @field spread float3
- * @field error float3
- * @field owner integer
- * @field team integer
- * @field ttl number
- * @field gravity number
- * @field tracking number
- * @field maxRange number
- * @field startAlpha number
- * @field endAlpha number
- * @field model string
- * @field cegTag string
- */
-
-/***
  * @function Spring.SetProjectileAlwaysVisible
  * @param projectileID integer
  * @param alwaysVisible boolean
@@ -5393,7 +5404,10 @@ int LuaSyncedCtrl::SetProjectileSpinSpeed(lua_State* L) { return 0; } // FIXME: 
 int LuaSyncedCtrl::SetProjectileSpinVec(lua_State* L) { return 0; } // FIXME: DELETE ME
 
 
-/***
+/*** Set piece projectile params
+ *
+ * Non passed or nil args don't set params.
+ *
  * @function Spring.SetPieceProjectileParams
  * @param projectileID integer
  * @param explosionFlags number?
@@ -5402,7 +5416,6 @@ int LuaSyncedCtrl::SetProjectileSpinVec(lua_State* L) { return 0; } // FIXME: DE
  * @param spinVectorX number?
  * @param spinVectorY number?
  * @param spinVectorZ number?
- * @return nil
  */
 int LuaSyncedCtrl::SetPieceProjectileParams(lua_State* L)
 {
@@ -5760,6 +5773,19 @@ int LuaSyncedCtrl::GiveOrderArrayToUnitArray(lua_State* L)
 /******************************************************************************/
 /******************************************************************************/
 
+/* - no doc
+ * @param x number
+ * @param z number
+ * @param height number
+ */
+/* - no doc
+ * @param x1 number
+ * @param z1 number
+ * @param x2 number
+ * @param z2 number
+ * @param height number
+ * @param factor number
+ */
 static void ParseParams(lua_State* L, const char* caller, float& factor,
 		int& x1, int& z1, int& x2, int& z2, int resolution, int maxX, int maxZ)
 {
@@ -5811,13 +5837,23 @@ static inline void ParseMapParams(lua_State* L, const char* caller,
  * Note that x & z coords are in worldspace (Game.mapSizeX/Z), still the heightmap resolution is Game.squareSize.
 ******************************************************************************/
 
-/*** Set a certain height to a point or rectangle area on the world
- *
+
+/*** 
+ * Set the height of a point in the world.
+ * 
+ * @function Spring.LevelHeightMap
+ * @param x number
+ * @param z number
+ * @param height number
+ */
+/***
+ * Set the height of a rectangle area in the world.
+ * 
  * @function Spring.LevelHeightMap
  * @param x1 number
  * @param z1 number
- * @param x2_height number if y2 and height are nil then this parameter is the height
- * @param z2 number?
+ * @param x2 number
+ * @param z2 number
  * @param height number?
  * @return nil
  */
@@ -5841,13 +5877,23 @@ int LuaSyncedCtrl::LevelHeightMap(lua_State* L)
 }
 
 
-/*** Add a certain height to a point or rectangle area on the world
+/*** 
+ * Add height to a point in the world.
  *
  * @function Spring.AdjustHeightMap
+ * @param x number
+ * @param z number
+ * @param height number
+ */
+
+/***
+ * Add height to a rectangle in the world.
+ * 
+ * @function Spring.AdjustHeightMap
  * @param x1 number
- * @param y1 number
- * @param x2_height number if y2 and height are nil then this parameter is the height
- * @param y2 number?
+ * @param z1 number
+ * @param x2 number
+ * @param z2 number
  * @param height number?
  * @return nil
  */
@@ -5872,15 +5918,23 @@ int LuaSyncedCtrl::AdjustHeightMap(lua_State* L)
 	return 0;
 }
 
-
-/*** Restore original map height to a point or rectangle area on the world
+/*** 
+ * Restore map height at a point in the world.
  *
  * @function Spring.RevertHeightMap
+ * @param x number
+ * @param z number
+ * @param height number
+ */
+/***
+ * Restore map height of a rectangle area in the world.
+ * 
+ * @function Spring.RevertHeightMap
  * @param x1 number
- * @param y1 number
- * @param x2_factor number if y2 and factor are nil then this parameter is the factor
- * @param y2 number?
- * @param factor number?
+ * @param z1 number
+ * @param x2 number
+ * @param z2 number
+ * @param height number?
  * @return nil
  */
 int LuaSyncedCtrl::RevertHeightMap(lua_State* L)
@@ -5970,7 +6024,7 @@ int LuaSyncedCtrl::AddHeightMap(lua_State* L)
  *
  * @function Spring.SetHeightMap
  *
- * Can only be called in `Spring.SetHeightMapFunc`. The terraform argument is
+ * Can only be called in `Spring.SetHeightMapFunc`.
  *
  * @param x number
  * @param z number
@@ -6090,15 +6144,23 @@ int LuaSyncedCtrl::SetHeightMapFunc(lua_State* L)
  * @section heightmap
 ******************************************************************************/
 
-/*** Set a height to a point or rectangle area to the original map height cache
+/***
+ * Set the height of a point in the original map height cache.
+ *
+ * @function Spring.LevelOriginalHeightMap
+ * @param x number
+ * @param z number
+ * @param height number
+ */
+/***
+ * Set the height of a rectangle area in the original map height cache.
  *
  * @function Spring.LevelOriginalHeightMap
  * @param x1 number
- * @param y1 number
- * @param x2_height number if y2 and height are nil then this parameter is the height
- * @param y2 number?
- * @param height number?
- * @return nil
+ * @param z1 number
+ * @param x2 number
+ * @param z2 number
+ * @param height number
  */
 int LuaSyncedCtrl::LevelOriginalHeightMap(lua_State* L)
 {
@@ -6118,16 +6180,23 @@ int LuaSyncedCtrl::LevelOriginalHeightMap(lua_State* L)
 	return 0;
 }
 
-
-/*** Add height to a point or rectangle area to the original map height cache
+/***
+ * Add height to a point in the original map height cache.
+ *
+ * @function Spring.AdjustOriginalHeightMap
+ * @param x number
+ * @param z number
+ * @param height number
+ */
+/***
+ * Add height to a rectangle area in the original map height cache.
  *
  * @function Spring.AdjustOriginalHeightMap
  * @param x1 number
- * @param y1 number
- * @param x2_height number if y2 and height are nil then this parameter is the height
- * @param y2 number?
- * @param height number?
- * @return nil
+ * @param z1 number
+ * @param x2 number
+ * @param z2 number
+ * @param height number
  */
 int LuaSyncedCtrl::AdjustOriginalHeightMap(lua_State* L)
 {
@@ -6150,14 +6219,23 @@ int LuaSyncedCtrl::AdjustOriginalHeightMap(lua_State* L)
 }
 
 
-/*** Restore original map height cache to a point or rectangle area on the world
+/*** 
+ * Restore original map height at a point in the world.
  *
  * @function Spring.RevertOriginalHeightMap
+ * @param x number
+ * @param z number
+ * @param height number
+ */
+/***
+ * Restore original map height over a rectangle in the world.
+ * 
+ * @function Spring.RevertOriginalHeightMap
  * @param x1 number
- * @param y1 number
- * @param x2_factor number if y2 and factor are nil then this parameter is the factor
- * @param y2 number?
- * @param factor number?
+ * @param z1 number
+ * @param x2 number
+ * @param z2 number
+ * @param height number?
  * @return nil
  */
 int LuaSyncedCtrl::RevertOriginalHeightMap(lua_State* L)
@@ -6360,13 +6438,19 @@ int LuaSyncedCtrl::RebuildSmoothMesh(lua_State* L)
 
 /***
  * @function Spring.LevelSmoothMesh
+ * @param x number
+ * @param z number
+ * @param height number
+ */
+/***
+ * @function Spring.LevelSmoothMesh
  * @param x1 number
  * @param z1 number
- * @param x2 number?
- * @param z2 number?
+ * @param x2 number
+ * @param z2 number
  * @param height number
- * @return nil
  */
+
 int LuaSyncedCtrl::LevelSmoothMesh(lua_State* L)
 {
 	float height;
@@ -6386,12 +6470,17 @@ int LuaSyncedCtrl::LevelSmoothMesh(lua_State* L)
 
 /***
  * @function Spring.AdjustSmoothMesh
+ * @param x number
+ * @param z number
+ * @param height number
+ */
+/***
+ * @function Spring.AdjustSmoothMesh
  * @param x1 number
  * @param z1 number
- * @param x2 number?
- * @param z2 number?
+ * @param x2 number
+ * @param z2 number
  * @param height number
- * @return nil
  */
 int LuaSyncedCtrl::AdjustSmoothMesh(lua_State* L)
 {
@@ -6410,14 +6499,18 @@ int LuaSyncedCtrl::AdjustSmoothMesh(lua_State* L)
 }
 
 /***
- *
+ * @function Spring.RevertSmoothMesh
+ * @param x number
+ * @param z number
+ * @param origFactor number
+ */
+/***
  * @function Spring.RevertSmoothMesh
  * @param x1 number
  * @param z1 number
- * @param x2 number?
- * @param z2 number?
+ * @param x2 number
+ * @param z2 number
  * @param origFactor number
- * @return nil
  */
 int LuaSyncedCtrl::RevertSmoothMesh(lua_State* L)
 {
@@ -6881,6 +6974,24 @@ int LuaSyncedCtrl::SetUnitLoadingTransport(lua_State* L)
 	return 0;
 }
 
+/***
+ * @class ProjectileParams
+ * @field pos xyz
+ * @field speed xyz
+ * @field spread xyz
+ * @field error xyz
+ * @field end xyz
+ * @field owner integer
+ * @field team integer
+ * @field ttl number
+ * @field gravity number
+ * @field tracking number
+ * @field maxRange number
+ * @field startAlpha number
+ * @field endAlpha number
+ * @field model string
+ * @field cegTag string
+ */
 
 /***
  *

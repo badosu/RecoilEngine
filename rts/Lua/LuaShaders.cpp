@@ -57,6 +57,7 @@ bool LuaShaders::PushEntries(lua_State* L)
 
 	REGISTER_LUA_CFUNC(GetEngineUniformBufferDef);
 	REGISTER_LUA_CFUNC(GetEngineModelUniformDataDef);
+	REGISTER_LUA_CFUNC(GetEngineModelUniformDataSize);
 
 	REGISTER_LUA_CFUNC(SetUnitBufferUniforms);
 	REGISTER_LUA_CFUNC(SetFeatureBufferUniforms);
@@ -1014,7 +1015,7 @@ namespace {
 		if (o == nullptr)
 			luaL_error(L, "gl.%s() Invalid %s id (%d)", func, &spring::TypeToCStr<T>()[1], id);
 
-		ModelUniformData& uni = modelsUniformsStorage.GetObjUniformsArray(o);
+		ModelUniformData& uni = modelUniformsStorage.GetObjUniformsArray(o);
 
 		std::array<float, ModelUniformData::MAX_MODEL_UD_UNIFORMS> floatArray = {0};
 		int size = LuaUtils::ParseFloatArray(L, 2, floatArray.data(), ModelUniformData::MAX_MODEL_UD_UNIFORMS);
@@ -1212,7 +1213,7 @@ int LuaShaders::UniformArray(lua_State* L)
  *
  * @function gl.UniformMatrix
  * @param locationID integer|string uniformName
- * @param matrix "shadows"|"camera"|"caminv"|"camprj" Name of common matrix.
+ * @param matrix MatrixName Name of common matrix.
  */
 
 /***
@@ -1343,12 +1344,35 @@ int LuaShaders::GetEngineModelUniformDataDef(lua_State* L)
 	return 1;
 }
 
+/***
+ *
+ * @function gl.GetEngineModelUniformDataSize
+ *
+ * Return the current size values of ModelUniformData structure (per Unit/Feature buffer available on GPU)
+ *
+ * @param index number
+ * @return number sizeInElements
+ * @return number sizeInBytesOnCPU
+
+ */
+int LuaShaders::GetEngineModelUniformDataSize(lua_State* L)
+{
+	if (!globalRendering->haveGL4)
+		return 0;
+
+	const auto sizeInElems = modelUniformsStorage.GetSize();
+	lua_pushinteger(L, static_cast<lua_Integer>(sizeInElems                           ));
+	lua_pushinteger(L, static_cast<lua_Integer>(sizeInElems * sizeof(ModelUniformData)));
+
+	return 2;
+}
+
 /*** Sets the Geometry shader parameters for shaderID. Needed by geometry shader programs (check the opengl GL_ARB_geometry_shader4 extension for glProgramParameteri)
  *
  * @function gl.SetGeometryShaderParameter
  * @param shaderID integer
- * @param param number
- * @param number number
+ * @param key number
+ * @param value number
  * @return nil
  */
 int LuaShaders::SetGeometryShaderParameter(lua_State* L)

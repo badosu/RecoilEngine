@@ -10,6 +10,7 @@
 #include "ExpGenSpawnable.h"
 #include "ExpGenSpawnableMemberInfo.h"
 #include "Game/Camera.h"
+#include "Game/GameHelper.h"
 #include "Game/GlobalUnsynced.h" // guRNG
 #include "Lua/LuaParser.h"
 #include "Map/Ground.h"
@@ -24,6 +25,7 @@
 #include "Rendering/Env/Particles/Classes/WakeProjectile.h"
 #include "Rendering/Env/Particles/Classes/WreckProjectile.h"
 
+#include "Sim/Misc/LosHandler.h"
 #include "Sim/Projectiles/ProjectileHandler.h"
 #include "Sim/Projectiles/ProjectileMemPool.h"
 
@@ -65,6 +67,7 @@ unsigned int CCustomExplosionGenerator::GetFlagsFromTable(const LuaTable& table)
 	flags |= (CEG_SPWF_UNDERWATER * table.GetBool("underwater", false));
 	flags |= (CEG_SPWF_UNIT       * table.GetBool(      "unit", false));
 	flags |= (CEG_SPWF_NO_UNIT    * table.GetBool(    "nounit", false));
+	flags |= (CEG_SPWF_ALWAYS_VISIBLE * table.SubTable("properties").GetBool("alwaysvisible", false));
 
 	return flags;
 }
@@ -373,6 +376,51 @@ bool CExplosionGeneratorHandler::GenExplosion(
 	return (expGen->Explosion(pos, dir, damage, radius, gfxMod, owner, hit, withMutex));
 }
 
+
+bool CExplosionGeneratorHandler::PredictExplosionVisible(const WeaponDef* weaponDef, const CExplosionParams& params, int allyTeamID)
+{
+	if (gu->spectatingFullView)
+		return true;
+
+	if (allyTeamID == CEventClient::AllAccessTeam)
+		return true;
+
+	bool losAir = true;
+	bool losGround = true;
+	const auto& pos = params.pos;
+	if (weaponDef != nullptr) {
+		if (weaponDef != nullptr && weaponDef->visuals.alwaysVisible)
+			return true;
+
+		const int explosionID = (weaponDef != nullptr)? weaponDef->impactExplosionGeneratorID: CExplosionGeneratorHandler::EXPGEN_ID_STANDARD;
+
+		const auto* cGen = dynamic_cast<CCustomExplosionGenerator*>(explGenHandler.GetGenerator(explosionID));
+		if (cGen != nullptr) {
+			const float realHeight = CGround::GetHeightReal(pos);
+			unsigned int visFlags = CCustomExplosionGenerator::GetFlagsFromHeight(pos.y, realHeight);
+
+			const bool unitCollision = (params.hitUnit != nullptr);
+			visFlags |= (CCustomExplosionGenerator::CEG_SPWF_UNIT    * (    unitCollision));
+			visFlags |= (CCustomExplosionGenerator::CEG_SPWF_NO_UNIT * (1 - unitCollision));
+
+			const unsigned int commonFlags = cGen->CommonVisibleFlags(visFlags);
+
+			if (commonFlags & CCustomExplosionGenerator::CEG_SPWF_ALWAYS_VISIBLE) {
+				return true;
+			}
+
+			const bool    airExplosion = ((visFlags & CCustomExplosionGenerator::CEG_SPWF_AIR       ) != 0);
+			const bool groundExplosion = ((visFlags & CCustomExplosionGenerator::CEG_SPWF_GROUND    ) != 0);
+			const bool  waterExplosion = ((visFlags & CCustomExplosionGenerator::CEG_SPWF_WATER     ) != 0);
+			const bool     uwExplosion = ((visFlags & CCustomExplosionGenerator::CEG_SPWF_UNDERWATER) != 0);
+			losAir = airExplosion;
+			losGround = groundExplosion || waterExplosion || uwExplosion;
+		}
+	}
+	if (allyTeamID >= 0 && ((losGround && losHandler->InLos(pos, allyTeamID)) || (losAir && losHandler->InAirLos(pos, allyTeamID))))
+		return true;
+	return false;
+}
 
 
 bool CStdExplosionGenerator::Explosion(
@@ -863,6 +911,16 @@ void CCustomExplosionGenerator::ParseExplosionCode(
 }
 
 
+unsigned int CCustomExplosionGenerator::CommonVisibleFlags(unsigned int visibilityFlags) const
+{
+	int resFlags = 0;
+	for (auto& psi: expGenParams.projectiles) {
+		if (psi.flags & visibilityFlags)
+			resFlags |= psi.flags;
+	}
+	return resFlags;
+}
+
 
 bool CCustomExplosionGenerator::Load(CExplosionGeneratorHandler* handler, const char* tag)
 {
@@ -911,13 +969,38 @@ bool CCustomExplosionGenerator::Load(CExplosionGeneratorHandler* handler, const 
 
 		spawnTable.SubTable("properties").GetMap(props);
 
-		for (const auto& propIt: props) {
-			SExpGenSpawnableMemberInfo memberInfo = {0, 0, 0, STRING_HASH(std::move(StringToLower(propIt.first))), SExpGenSpawnableMemberInfo::TYPE_INT, nullptr};
+		// handle special cases first
+
+		/// animparams (lowercased) is used to set up defaults for
+		/// animParams1, animParams2, animParams3, animParams4 in case their values are not defined
+		if (auto it = props.find("animparams"); it != props.end()) {
+			// it->second will change on props.emplace(), need a copy
+			const auto animParams = it->second;
+			props.erase(it);
+
+			if (auto apit = props.find("animparams1"); apit == props.end()) {
+				props.emplace("animparams1", animParams);
+			}
+			if (auto apit = props.find("animparams2"); apit == props.end()) {
+				props.emplace("animparams2", animParams);
+			}
+			if (auto apit = props.find("animparams3"); apit == props.end()) {
+				props.emplace("animparams3", animParams);
+			}
+			if (auto apit = props.find("animparams4"); apit == props.end()) {
+				props.emplace("animparams4", animParams);
+			}
+
+		}
+
+		for (const auto& [key, val] : props) {
+			SExpGenSpawnableMemberInfo memberInfo = { 0, 0, 0, STRING_HASH(std::move(StringToLower(key))), SExpGenSpawnableMemberInfo::TYPE_INT, nullptr };
 
 			if (CExpGenSpawnable::GetSpawnableMemberInfo(className, memberInfo)) {
-				ParseExplosionCode(&psi, propIt.second, memberInfo, code);
-			} else {
-				LOG_L(L_WARNING, "[CCEG::%s] unknown field %s::%s in spawn-table \"%s\" for CEG \"%s\"", __func__, tag, propIt.first.c_str(), spawnName.c_str(), className.c_str());
+				ParseExplosionCode(&psi, val, memberInfo, code);
+			}
+			else {
+				LOG_L(L_WARNING, "[CCEG::%s] unknown field %s::%s in spawn-table \"%s\" for CEG \"%s\"", __func__, tag, key.c_str(), spawnName.c_str(), className.c_str());
 			}
 		}
 
