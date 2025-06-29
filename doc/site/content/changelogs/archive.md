@@ -8,65 +8,60 @@ draft = false
 
 Below is a series of changelogs that have been appended to since the first releases of Spring in the mid-2000s, up until Recoil started using dedicated changelog posts. They've been kicking around in a text file for a while, so it seems appropriate to put them in their own post.
 
----
-
 > [!NOTE]
-> Changelogs are now available at [changelogs]({{% ref "changelogs" %}}).
-> In particular, the running changelog since the last version is at [running-changelog]({{% ref "running-changelog" %}}).
+> Changelogs are available at [changelogs]({{% ref "changelogs" %}}).
 > If you're looking at migrating from upstream Spring 105.0, there is a guide at [migrating-from-spring]({{% ref "migrating-from-spring" %}}),
 
 Spring changelog
 (since 85.0 a "!" prefix indicates backward compatibility broke)
 (numbers in brackets normally mean the mantis ticket ID)
 
--- BAR105 NEXT ---------------------------------------------------
-
-(since release 2511)
+### BAR105 NEXT (since release 2511)
 
 Lua:
 
 - add `Spring.GetUnitPhysicalState(number unitID) -> Gets the unit's PhysicalState bitmask.
-  https://github.com/beyond-all-reason/spring/pull/1528
+  {{< pull 1528 >}}
 - add `Spring.RebuildSmoothMesh` to force an immediate build of the complete Air Smooth Mesh.
-  https://github.com/beyond-all-reason/spring/pull/1342
+  {{< pull 1342 >}}
 - Fix #1523, `Spring.UnitArrivedAtGoal` stack issue with warning spam.
-  https://github.com/beyond-all-reason/spring/pull/1546
+  {{< pull 1546 >}}
 - DrawWorldPreParticles is now has parameters describing the particular phase it is called within a draw frame.
 
 Misc:
 
-- Fixed broken test. https://github.com/beyond-all-reason/spring/pull/1545
+- Fixed broken test. {{< pull 1545 >}}
 - New `OverheadMinZoomDistance` and `CamSpringMinZoomDistance` ConfigFloats to set minimum camera zoom distances for their respective cameras.
 
 Pathing:
 
 - HAPFS uses the raw move found in the ground movement code, rather than its on version, which addresses several
-  issues. https://github.com/beyond-all-reason/spring/pull/1402
+  issues. {{< pull 1402 >}}
 - HAPFS uses more detailed checks on unit movement to better follow changes in the submerged state to give paths
-  that will avoid units getting stuck on underwater obstacles. https://github.com/beyond-all-reason/spring/pull/1402
+  that will avoid units getting stuck on underwater obstacles. {{< pull 1402 >}}
 - `movement.allowDirectionalPathing` when enabled now allows HAPFS to use directionality in its pathing algorithm.
-  https://github.com/beyond-all-reason/spring/pull/1402
+  {{< pull 1402 >}}
 - `movement.preferShortestPath` when enabled allows QTPFS to use the shortest path, rather than the fastest path.
-  https://github.com/beyond-all-reason/spring/pull/1402
+  {{< pull 1402 >}}
 
 Sim:
 
 - Added: `system.smoothMeshResDivider` and `system.smoothMeshSmoothRadius` to control the behaviour of the Air Smooth
-  Mesh. https://github.com/beyond-all-reason/spring/pull/1341
+  Mesh. {{< pull 1341 >}}
 - Added: `float separationDistance` to unitDef, so that units try to keep separationDistance elmos away from each
   other. This avoids having to increase the unit's movedef size, which has other additional consequences.
-  https://github.com/beyond-all-reason/spring/pull/1358
+  {{< pull 1358 >}}
 - Terraform activities are now done at slow update rate, rather than every frame. This is back to original behaviour.
   An extra step is added at the end of the job to guarantee that the last of the terrain changes are processed and not
-  missed. https://github.com/beyond-all-reason/spring/pull/1360/
+  missed. {{< pull 1360 >}}
 - `CGroundMoveType::ChangeHeading` now avoid updating the unit if no rotation is necessary.
-  https://github.com/beyond-all-reason/spring/pull/1382
+  {{< pull 1382 >}}
 
 UI:
 
-- SDL updates in preparation for RmlUI. https://github.com/beyond-all-reason/spring/pull/1419
+- SDL updates in preparation for RmlUI. {{< pull 1419 >}}
 
-(since release 1544)
+### Since release 1544
 
 Lua:
 
@@ -150,11 +145,11 @@ Misc:
 - Add new `/remove` cheat-only command, it removes selected units similar to
   `/destroy` except no death script is run (so no explosion nor wreckage).
 - Units no longer clear command queue when shared. This can be implemented gameside with UnitGiven callin.
-- Fix game save/load issue https://github.com/beyond-all-reason/spring/issues/1425
-- Fix rotating the camera with the middle mouse stopped unit tracking. https://github.com/beyond-all-reason/spring/issues/626
+- Fix game save/load issue {{< issue 1425 >}}
+- Fix rotating the camera with the middle mouse stopped unit tracking. {{< issue "626" >}}
 - Fix when a client that takes too long to connect can potentially trigger a desync.
-  https://github.com/beyond-all-reason/spring/issues/1406
-- Prevent logging general log information before the game engine has started. https://github.com/beyond-all-reason/spring/issues/683
+  {{< issue 1406 >}}
+- Prevent logging general log information before the game engine has started. {{< issue "683" >}}
 - New modinfo setting to skip issuing newly created units a move command off of the factory pad: insertBuiltUnitMoveCommand.
 
 Sim:
@@ -255,23 +250,23 @@ Sim:
   while before failing later.
 - Units will consider going to next path waypoint if they collide with a unit standing on their waypoint.
 - Fix issue where units can get stuck walking into each other if one of their paths is changed as they reached their
-  current move goal. https://github.com/beyond-all-reason/spring/issues/1469
-- Unit target selection no longer uses a random element. https://github.com/beyond-all-reason/spring/pull/1453
+  current move goal. {{<issue 1469>}}
+- Unit target selection no longer uses a random element. {{< pull 1453 >}}
 - Fix collision momentum was being maintained on a unit when it gets turned back into a nanoframe.
-  https://github.com/beyond-all-reason/spring/issues/1413
+  {{< issue 1413 >}}
 - Fix when mutltiple builders are tasked with building something floating on the surface of the water and get there at
   different frames, it can trigger multiple versions of the same unit are started on the same location.
-  https://github.com/beyond-all-reason/spring/pull/1441
+  {{< pull 1441 >}}
 - Fixed the bugger-off checks may fail to get rid of units if they stand on the edge of an area of a new long building.
-  https://github.com/beyond-all-reason/spring/issues/1428
+  {{< issue 1428 >}}
 - Fixed: units can sometimes get left behind at a "gather and wait" point.
-  https://github.com/beyond-all-reason/Beyond-All-Reason/issues/2799
+  {{< issue 2799 >}}
 - Fixed: provide a UnitArrivedAtGoal event so that the game can tell that the engine believes the move is complete to
-  help avoid custom move code breakage. https://github.com/beyond-all-reason/spring/issues/1459
+  help avoid custom move code breakage. {{< issue 1459 >}}
 - Fixed: burst-fire weapons could hit new targets outside their intended aim angles mid-burst.
-  https://github.com/beyond-all-reason/spring/issues/1470
+  {{< pull 1470 >}}
 - Fixed: units pathing using HAPFS could can caught in an infinite looping cycle, never reaching their move goal.
-  https://github.com/beyond-all-reason/spring/pull/1444
+  {{< pull 1444 >}}
 
 Sim::QTPFS
 
@@ -427,7 +422,7 @@ Fixes:
 - Fix COB SetMaxReloadTime receiving a value 10% smaller than it should
 - Fix builders not placing nanoframes from their maximum range
 
--- BAR105 1544 ---------------------------------------------------
+### BAR105 1544
 
 BREAKING CHANGES SINCE 105.0 & HOW TO GET BACK OLD BEHAVIOURS:
 ! Add movetilt and movereset for previously hardcoded ALT and CTRL camera bindings.

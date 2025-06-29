@@ -1,4 +1,0 @@
-+++
-title = "Gadgets"
-draft = true
-+++

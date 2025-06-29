@@ -23,12 +23,13 @@ jobs:
             rts/Lua
             rts/Rml/SolLua
       
-      - name: Install Task
-        run: sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
-      
       - name: Generate Lua library
-        working-directory: doc
-        run: task extract-lua REPO_PATH=https://github.com/${{ github.repository }}/blob/${{ github.sha }} DO_ERROR=true
+        run: |
+          npm install -g lua-doc-extractor@3
+          lua-doc-extractor "rts/Lua/**/*.cpp" "rts/Rml/SolLua/**/*.cpp" \
+            --dest rts/Lua/library/generated \
+            --repo https://github.com/${{ github.repository }}/blob/${{ github.sha }} \
+            --error
 
       - name: Install dra
         run: |
