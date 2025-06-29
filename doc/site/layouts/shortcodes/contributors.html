@@ -1,7 +1,14 @@
 {{ $owner := "beyond-all-reason" }}
 {{ $repo := "RecoilEngine" }}
-{{ $count := 100 }}
+{{ $count := 1000 }}
 {{ $max_pages := 5 }}
+{{ $opts := dict }}
+{{ $gh_token := os.Getenv "HUGO_GH_TOKEN" }}
+{{ with $gh_token }}
+	{{ $opts = dict
+		"headers" (dict "Authorization" $gh_token)
+	}}
+{{ end }}
 
 {{ $data := slice }}
 
@@ -12,7 +19,7 @@
 		$count
 		.
 	  }}
-	{{ with try (resources.GetRemote $url) }}
+	{{ with try (resources.GetRemote $url $opts) }}
 		{{ with .Err }}
 			{{ errorf "uh oh sisters! unable to get remote resource %s: %s" $url .}}
 		{{ else }}
@@ -41,11 +48,11 @@
 {{ $shuffled := shuffle $allContributors }}
 
 {{ $img_size := 48 }}
-<ul style="list-style-type: none; ">
+<ul style="list-style-type: none; margin: 8px;">
 	{{ range $shuffled }}
-	<li style="display: inline-block;">
+	<li style="display: inline-block; margin: 2px 4px 2px 4px;">
 		<a href="{{ .html_url }}">
-			<img src="{{ .avatar_url }}" width="{{ $img_size }}" height="{{ $img_size }}" alt="{{ .login }}">
+			<img src="{{ .avatar_url }}" width="{{ $img_size }}" height="{{ $img_size }}" alt="{{ .login }}" style="margin: 0;">
 		</a>
 	</li>
 	{{ end }}

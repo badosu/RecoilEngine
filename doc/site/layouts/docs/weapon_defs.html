@@ -8,27 +8,55 @@
 				{{ if .Title }}<h1>{{ .Title }}</h1>{{ end }}
 				{{ .Content }}
 
-				{{ $data := index .Site.Data.weapon_defs.WeaponDefs }}
-				{{ range $name, $info :=  $data }}
-					<h2>
-						{{ $name }}: <code>{{ index $info "type" }}</code><span class="hx-absolute -hx-mt-20" id="{{ $name }}"></span>
-
-						<a href="#{{ $name }}" class="subheading-anchor" aria-label="Permalink for this section"></a>
-					</h2>
-					<table>
-						{{ range $key_name, $human_name := dict "internalName" "Internal Name" "description" "Description" "defaultValue" "Default Value" }}
-							{{ $val := index $info $key_name }}
-							{{ if $val }}
-								<tr>
-									<td>{{ $human_name }}</td>
-									<td>{{ $val }}</td>
-								</tr>
-							{{ end }}
-						{{ end }}
-					</table>
-				{{ end }}
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Values</th>
+					</tr>
+					{{ $data := index .Site.Data.weapondefs.WeaponDefs }}
+					{{ range $name, $info :=  $data }}
+						<tr>
+							<td id="{{ $name }}">
+								<code>{{ if strings.Contains $info.type "string" }}string{{ else }}{{ $info.type }}{{ end }}</code>
+								<a href="#{{ $name }}">{{ $name }}</a>
+							</td>
+							<td>
+								{{ $info.description }}
+							</td>
+							<td>
+								<dl class="hx-text-xs">
+									{{ if $info.fallbackName }}
+										<dt>Fallback to:</dt>
+										<dd><code>{{ $info.fallbackName }}</code></dd>
+									{{ end }}
+									{{ if $info.defaultValue }}
+										<dt>Default:</dt>
+										<dd><code>{{ $info.defaultValue }}</code></dd>
+									{{ end }}
+									{{ if $info.minimumValue }}
+										<dt>Min:</dt>
+										<dd><code>{{ $info.minimumValue }}</code></dd>
+									{{ end }}
+									{{ if $info.maximumValue }}
+										<dt>Max:</dt>
+										<dd><code>{{ $info.maximumValue }}</code></dd>
+									{{ end }}
+									{{ if $info.scaleValue }}
+										<dt>Scale:</dt>
+										<dd><code>{{ $info.scaleValue }}</code></dd>
+									{{ end }}
+									{{ if $info.scaleValueString }}
+										<dt>Scaled by:</dt>
+										<dd><code>{{ $info.scaleValueString }}</code></dd>
+									{{ end }}
+								</dl>
+							</td>
+						</tr>
+					{{ end }}
+				</table>
 			</div>
-								 {{ partial "components/last-updated.html" . }}
+		{{ partial "components/last-updated.html" . }}
 		{{ partial "components/pager.html" . }}
 		{{ partial "components/comments.html" . }}
 		</main>

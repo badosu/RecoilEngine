@@ -1,6 +1,3 @@
 # lua site generation
-public
 temp
-resources/_gen
-content/docs/lua-api/*
 !content/docs/lua-api/_index
