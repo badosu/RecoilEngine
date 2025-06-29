@@ -1,0 +1,6 @@
+[tools]
+"aqua:gohugoio/hugo" = "latest"
+
+[tasks.server]
+description = "Run the site server locally"
+run = "hugo server --navigateToChanged"

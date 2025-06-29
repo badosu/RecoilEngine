@@ -2,7 +2,7 @@
 title = 'Writing Site Articles'
 date = 2025-05-14T19:17:01-07:00
 draft = false
-author: 'Slashscreen'
+author = 'Slashscreen'
 +++
 
 ## Quickstart
@@ -21,7 +21,7 @@ It's worth noting that since it's an incremental compile by default, if you star
 
 - As previously mentioned, the theme we are using seems to struggle with spaces in filepaths, so avoid them.
 - If you're making a new folder, it's best to make an `_index.md` for the folder.
-- If you're writing a link within the site, use `{{% ref "path/to/page/" %}}` for it to render correctly in relation to the site root (`beyond-all-reason.github.io/RecoilEngine`), otherwise they will be in relation to `beyond-all-reason.github.io/`.
+- If you're writing a link within the site, use `% ref "path/to/page/" %` for it to render correctly in relation to the site root (`beyond-all-reason.github.io/RecoilEngine`), otherwise they will be in relation to `beyond-all-reason.github.io/`.
 
 ### Templating and Shortcodes
 
@@ -75,15 +75,15 @@ A few shortcodes and layouts have been written for the website specifically. The
 
 ```json
 {
-	"command-name": {
-		"arguments": {
-			"": "Default command description",
-			"arguments": "Action description"
-		},
-		"cheatRequired": false,
-		"command": "CommandName",
-		"description": "'twas brillig, and the slithy toves"
-	}
+  "command-name": {
+    "arguments": {
+      "": "Default command description",
+      "arguments": "Action description"
+    },
+    "cheatRequired": false,
+    "command": "CommandName",
+    "description": "'twas brillig, and the slithy toves"
+  }
 }
 ```
 

@@ -4,6 +4,9 @@ title = 'Recoil Engine'
 
 minify.minifyOutput = true
 
+# We don't want to error if LUA-API is not built for example
+refLinksErrorLevel = "WARNING"
+
 [markup.goldmark.renderer]
 unsafe = true
 

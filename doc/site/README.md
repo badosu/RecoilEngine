@@ -1,10 +1,23 @@
 # Recoil Site Readme
 
-## Setting Up Local Site Development
+The recoil site is provisioned as a static site powered by [Hugo].
 
-For basic local site development, all that is required is [Hugo](https://gohugo.io/installation/).
+It also depends on and leverages several technologies and content:
 
-## Testing And Modifying Locally
+- Dependency and task management with [mise](https://mise.jdx.dev)
+- Lua API documentation extraction from engine source with [lua-doc-extractor]
+- Templating of the Lua API content with [emmylua_doc_cli]
+- Data from the engine binary to be templated as pages
+
+## Local development
+
+Provisioning Hugo locally should enable development and testing of most content
+in the site.
+
+Data for provisioning the Lua API and engine provided pages should enable
+testing the remaining pieces, but it's not required.
+
+### Setting up Hugo
 
 `cd` into `doc/site` and run `hugo server`. It will take 2-5 seconds to generate the site (depending on hardware), but then any changes you make will be compiled quickly.
 
@@ -29,6 +42,7 @@ The egenration system is all wired up for you using [Task](https://taskfile.dev/
 - `task generate-docs`: will extract lua meta files, generate markdown, and move it into the Hugo website.
 
 Extra arguments:
+
 - `PM=<package manager command>`: Package manager command if you wish to use a specific one. Defaults to `scoop` on windows, and `brew` on other platforms.
 - `REPO_PATH=<git repo path>`: Pass in an argument to `lua-doc-extractor`'s `--repo` argument.
 - `DO_ERROR=true`: enable `lua-doc-extractor`'s `--error` flag.
@@ -57,3 +71,4 @@ These are the important directories:
 - `README.md`: You are here!
 
 [Hugo]: https://gohugo.io/
+[lua-doc-extractor]: https://github.com/rhys-vdw/lua-doc-extractor
