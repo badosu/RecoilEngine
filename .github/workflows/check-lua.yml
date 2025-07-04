@@ -5,12 +5,14 @@ on:
     paths:
       - rts/Lua/**
       - rts/Rml/SolLua/**/*.cpp
+      - doc/site/mise.toml
   push:
     branches:
       - master
     paths:
       - rts/Lua/**
       - rts/Rml/SolLua/**/*.cpp
+      - doc/site/mise.toml
 env:
   RECOIL_LUA_LIBRARY_DIR: "rts/Lua/library"
   LUA_DOC_EXTRACTOR_SOURCE_REF: "https://github.com/${{ github.repository }}/blob/${{ github.sha }}"
@@ -25,6 +27,7 @@ jobs:
           sparse-checkout: |
             rts/Lua
             rts/Rml/SolLua
+            doc/site/mise.toml
 
       - uses: jdx/mise-action@v2
         with:

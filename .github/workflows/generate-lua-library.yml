@@ -27,6 +27,7 @@ jobs:
           sparse-checkout: |
             rts/Lua
             rts/Rml/SolLua
+            doc/site/mise.toml
           path: recoil
 
       - uses: jdx/mise-action@v2
