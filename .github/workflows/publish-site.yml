@@ -27,7 +27,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update -y
-          sudo apt-get install --fix-missing -y libsdl2-2.0-0 libopenal1 gpg sudo curl
+          sudo apt-get install --fix-missing -y libsdl2-2.0-0 libopenal1 curl
       - name: Install Dart Sass
         run: sudo snap install dart-sass
       - name: Checkout Source Repository
