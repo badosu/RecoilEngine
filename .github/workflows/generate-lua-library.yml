@@ -33,6 +33,7 @@ jobs:
       - uses: jdx/mise-action@v2
         with:
           working_directory: ./doc/site
+          install: false # [default: true] we only install deps required by the task
       
       - name: Generate Lua library
         env:

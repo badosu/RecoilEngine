@@ -31,6 +31,7 @@ jobs:
 
       - uses: jdx/mise-action@v2
         with:
+          install: false # [default: true] we only install deps required by the task
           working_directory: ./doc/site
 
       - name: Run lua-language-server --check
