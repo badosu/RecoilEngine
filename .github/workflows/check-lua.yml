@@ -28,7 +28,7 @@ jobs:
 
       - uses: jdx/mise-action@v2
         with:
-          working_directory: doc/site
+          working_directory: ./doc/site
 
       - name: Run lua-language-server --check
         working-directory: ./doc/site
