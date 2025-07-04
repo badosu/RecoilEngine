@@ -8,6 +8,9 @@ permissions:
   contents: read
   pages: write
   id-token: write
+env:
+  RECOIL_LUA_LIBRARY_DIR: "rts/Lua/library"
+  LUA_DOC_EXTRACTOR_SOURCE_REF: "https://github.com/${{ github.repository }}/blob/${{ github.sha }}"
 jobs:
   build:
     if: github.repository == 'beyond-all-reason/RecoilEngine' || github.event_name == 'workflow_dispatch'
@@ -31,6 +34,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          sparse-checkout: |
+            doc/site
+            rts/Lua
+            rts/Rml/SolLua
       - name: Cache Restore
         id: cache-restore
         uses: actions/cache/restore@v4
