@@ -1,15 +1,6 @@
 # Mise is kinda dumb since install does not provide a way to find all tools that tasks depends on
 # For certain CI tasks we want the mise cache to work properly
 
-# FIXME: Remove [env] when/if https://github.com/jdx/mise-action/pull/214#issuecomment-3037928388 is resolved
-[env]
-	HUGO_VERSION = "0.147.9"
-	LUA_DOC_EXTRACTOR_VERSION = "3" # lua_library lua_check
-	EMMYLUA_DOC_CLI_VERSION = "0.8.2"	# lua_pages lua_library lua_check
-	LUA_LANGUAGE_SERVER_VERSION="3.15.0" # lua_check
-	JQ_VERSION = "1.8.0" # binary_pages
-	7Z_VERSION = "24.09" # binary_pages
-
 [tools]
 # "aqua:gohugoio/hugo" = "0.147.9"
 	hugo = "{{env.HUGO_VERSION}}"
