@@ -7,6 +7,7 @@ on:
     paths:
       - rts/Lua/**
       - rts/Rml/SolLua/**/*.cpp
+      - doc/site/mise.toml
 env:
   RECOIL_LUA_LIBRARY_DIR: "rts/Lua/library"
   LUA_DOC_EXTRACTOR_SOURCE_REF: "https://github.com/${{ github.repository }}/blob/${{ github.sha }}"
@@ -33,13 +34,13 @@ jobs:
 
       - uses: jdx/mise-action@v2
         with:
-          working_directory: ./doc/site
+          working_directory: ./recoil/doc/site
           mise_toml: |
             [tools]
             "npm:lua-doc-extractor" = "{{env.LUA_DOC_EXTRACTOR_VERSION}}"
 
       - name: Generate Lua library
-        working-directory: ./doc/site
+        working-directory: ./recoil/doc/site
         run: mise run lua_library
 
       - name: Check out library repo
