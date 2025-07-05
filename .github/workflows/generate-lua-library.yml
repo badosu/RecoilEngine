@@ -10,6 +10,7 @@ on:
 env:
   RECOIL_LUA_LIBRARY_DIR: "rts/Lua/library"
   LUA_DOC_EXTRACTOR_SOURCE_REF: "https://github.com/${{ github.repository }}/blob/${{ github.sha }}"
+  LUA_DOC_EXTRACTOR_VERSION: "3"
 jobs:
   generate-library:
     if: github.repository == 'beyond-all-reason/RecoilEngine' || github.event_name == 'workflow_dispatch'
@@ -34,7 +35,17 @@ jobs:
         with:
           working_directory: ./doc/site
           install: false # [default: true] we only install deps required by the task
-      
+
+      - name: Cache Restore
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ~/.npm
+          key: npm-${{ env.LUA_DOC_EXTRACTOR_VERSION }}-${{ github.run_id }}
+          restore-keys:
+            npm-${{ env.LUA_DOC_EXTRACTOR_VERSION }}
+
       - name: Generate Lua library
         env:
           REPO_REF: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
@@ -67,3 +78,11 @@ jobs:
             Generated from ${{env.LUA_DOC_EXTRACTOR_SOURCE_REF}}
 
             ${{ github.event.head_commit.message }}
+
+      - name: Cache Save
+        id: cache-save
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.npm
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}

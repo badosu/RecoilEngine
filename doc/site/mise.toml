@@ -3,36 +3,37 @@
 	# "aqua:gohugoio/hugo" = "0.147.9"
 
 [env]
+	HUGO_VERSION = "0.147.9"
 	LUA_DOC_EXTRACTOR_VERSION = "3"
-	LUA_DOC_EXTRACTOR_SOURCE_REF = "https://github.com/beyond-all-reason/RecoilEngine/blob/master"
 	EMMYLUA_DOC_CLI_VERSION = "0.8.2"
+	LUA_DOC_EXTRACTOR_SOURCE_REF = "https://github.com/beyond-all-reason/RecoilEngine/blob/master"
 	RECOIL_LUA_LIBRARY_DIR = "rts/Lua/library"
 
 [vars]
 	lua_doc_gen_dest = "$RECOIL_LUA_LIBRARY_DIR/generated"
 	site_dir = 'doc/site'
-	site_temp_dir = 'doc/site/temp'
+	site_temp_dir = "{{vars.site_dir}}/temp"
 	lua_doc_paths = 'rts/{Lua,Rml/SolLua}/**/*.cpp'
-	lua_pages_dir = 'doc/site/content/docs/lua-api'
-	emmylua_cli_template = 'doc/site/emmylua-doc-cli-template'
+	lua_pages_dir = "{{vars.site_dir}}/content/docs/lua-api"
+	emmylua_cli_template = "{{vars.site_dir}}/emmylua-doc-cli-template"
 	latest_release_data = 'data/latest_release.json'
 
 [tasks]
 	[tasks.server]
 	description = "Run the site server locally"
-	tools.hugo = "0.147.9"
+	tools.hugo = "{{env.HUGO_VERSION}}"
 	run = "hugo server --navigateToChanged"
 
 	[tasks.server_full]
 	depends = ["lua_pages", "binary_pages"]
 	description = "Run the site server locally, with all possible content"
-	tools.hugo = "0.147.9"
+	tools.hugo = "{{env.HUGO_VERSION}}"
 	run = "hugo server --navigateToChanged"
 
 	[tasks.lua_pages]
 	description = "Generate Lua API Pages"
 	tools."cargo-binstall" = "latest"
-	tools."cargo:emmylua_doc_cli" = "0.8.2"
+	tools."cargo:emmylua_doc_cli" = "{{env.EMMYLUA_DOC_CLI_VERSION}}"
 	depends = ["lua_library"]
 	dir = "../../"
 	run = [
@@ -96,7 +97,7 @@
 	tools.lua-language-server = "3.15.0"
 	dir = "../../"
 	run = [
-		"lua-language-server --check $RECOIL_LUA_LIBRARY_DIR"
+		"lua-language-server --check \"${RECOIL_LUA_LIBRARY_DIR}\""
 	]
 
 	[tasks.lua_library]
@@ -104,8 +105,8 @@
 	tools.node = "22.17.0"
 	dir = "../../"
 	run = [
-		"npm install -g lua-doc-extractor@3",
-		"lua-doc-extractor --src \"{{vars.lua_doc_paths}}\" --dest {{vars.lua_doc_gen_dest}} --repo $LUA_DOC_EXTRACTOR_SOURCE_REF"
+		"npm install -g \"lua-doc-extractor@${LUA_DOC_EXTRACTOR_VERSION}\"",
+		"lua-doc-extractor --src \"{{vars.lua_doc_paths}}\" --dest {{vars.lua_doc_gen_dest}} --repo \"${LUA_DOC_EXTRACTOR_SOURCE_REF}\""
 	]
 
 	[tasks.latest_release_data]

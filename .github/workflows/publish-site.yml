@@ -11,6 +11,9 @@ permissions:
 env:
   RECOIL_LUA_LIBRARY_DIR: "rts/Lua/library"
   LUA_DOC_EXTRACTOR_SOURCE_REF: "https://github.com/${{ github.repository }}/blob/${{ github.sha }}"
+  LUA_DOC_EXTRACTOR_VERSION: "3"
+  EMMYLUA_DOC_CLI_VERSION: "0.8.2"
+  HUGO_VERSION: "0.147.9"
 jobs:
   build:
     if: github.repository == 'beyond-all-reason/RecoilEngine' || github.event_name == 'workflow_dispatch'
@@ -31,7 +34,7 @@ jobs:
       - name: Install Dart Sass
         run: sudo snap install dart-sass
       - name: Checkout Source Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           sparse-checkout: |
@@ -44,9 +47,13 @@ jobs:
         with:
           path: |
             ${{ runner.temp }}/hugo_cache
-          key: hugo-${{ github.run_id }}
+            ~/.cargo
+            ~/.npm
+            ~/go/pkg/mod # actually uses `go env GOMODCACHE` output
+            ~/.cache/go-build # actually uses `go env GOCACHE` output
+          key: site-${{ env.LUA_DOC_EXTRACTOR_VERSION }-${{ env.EMMYLUA_DOC_CLI_VERSION }}}-${{ env.HUGO_VERSION }}-${{ github.run_id }}
           restore-keys:
-            hugo-
+            site-${{ env.LUA_DOC_EXTRACTOR_VERSION }-${{ env.EMMYLUA_DOC_CLI_VERSION }}}-${{ env.HUGO_VERSION }}-
       - name: Configure Git
         run: git config core.quotepath false
       - name: Setup Pages
@@ -77,6 +84,10 @@ jobs:
         with:
           path: |
             ${{ runner.temp }}/hugo_cache
+            ~/.cargo
+            ~/.npm
+            ~/go/pkg/mod # actually uses `go env GOMODCACHE` output
+            ~/.cache/go-build # actually uses `go env GOCACHE` output
           key: ${{ steps.cache-restore.outputs.cache-primary-key }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

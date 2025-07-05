@@ -16,6 +16,7 @@ on:
 env:
   RECOIL_LUA_LIBRARY_DIR: "rts/Lua/library"
   LUA_DOC_EXTRACTOR_SOURCE_REF: "https://github.com/${{ github.repository }}/blob/${{ github.sha }}"
+  LUA_DOC_EXTRACTOR_VERSION: "3"
 jobs:
   check-library:
     name: Check library
@@ -34,6 +35,16 @@ jobs:
           install: false # [default: true] we only install deps required by the task
           working_directory: ./doc/site
 
+      - name: Cache Restore
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ~/.npm
+          key: npm-${{ env.LUA_DOC_EXTRACTOR_VERSION }}-${{ github.run_id }}
+          restore-keys:
+            npm-${{ env.LUA_DOC_EXTRACTOR_VERSION }}
+
       - name: Run lua-language-server --check
         working-directory: ./doc/site
         run: mise run lua_check
@@ -44,3 +55,11 @@ jobs:
         with:
           name: ${{github.run_id}}-library
           path: ${{env.RECOIL_LUA_LIBRARY_DIR}}
+
+      - name: Cache Save
+        id: cache-save
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.npm
+          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
