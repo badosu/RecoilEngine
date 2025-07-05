@@ -25,7 +25,6 @@ jobs:
     concurrency:
       group: "pages"
       cancel-in-progress: false
-    env:
     steps:
       - name: Install Dependencies
         run: |
