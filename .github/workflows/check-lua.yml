@@ -41,9 +41,9 @@ jobs:
         with:
           path: |
             ~/.npm
-          key: npm-${{ env.LUA_DOC_EXTRACTOR_VERSION }}-${{ github.run_id }}
+          key: npm-check-lua-${{ env.LUA_DOC_EXTRACTOR_VERSION }}-${{ github.run_id }}
           restore-keys:
-            npm-${{ env.LUA_DOC_EXTRACTOR_VERSION }}
+            npm-check-lua-${{ env.LUA_DOC_EXTRACTOR_VERSION }}
 
       - name: Run lua-language-server --check
         working-directory: ./doc/site

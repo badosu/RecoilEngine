@@ -42,9 +42,9 @@ jobs:
         with:
           path: |
             ~/.npm
-          key: npm-${{ env.LUA_DOC_EXTRACTOR_VERSION }}-${{ github.run_id }}
+          key: npm-gen-lua-${{ env.LUA_DOC_EXTRACTOR_VERSION }}-${{ github.run_id }}
           restore-keys:
-            npm-${{ env.LUA_DOC_EXTRACTOR_VERSION }}
+            npm-gen-lua-${{ env.LUA_DOC_EXTRACTOR_VERSION }}
 
       - name: Generate Lua library
         env:
