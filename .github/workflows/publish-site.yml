@@ -51,9 +51,9 @@ jobs:
             ~/.npm
             ~/go/pkg/mod # actually uses `go env GOMODCACHE` output
             ~/.cache/go-build # actually uses `go env GOCACHE` output
-          key: site-${{ env.LUA_DOC_EXTRACTOR_VERSION }-${{ env.EMMYLUA_DOC_CLI_VERSION }}}-${{ env.HUGO_VERSION }}-${{ github.run_id }}
+          key: site-${{ env.LUA_DOC_EXTRACTOR_VERSION }}-${{ env.EMMYLUA_DOC_CLI_VERSION }}-${{ env.HUGO_VERSION }}-${{ github.run_id }}
           restore-keys:
-            site-${{ env.LUA_DOC_EXTRACTOR_VERSION }-${{ env.EMMYLUA_DOC_CLI_VERSION }}}-${{ env.HUGO_VERSION }}-
+            site-${{ env.LUA_DOC_EXTRACTOR_VERSION }}-${{ env.EMMYLUA_DOC_CLI_VERSION }}}-${{ env.HUGO_VERSION }}-
       - name: Configure Git
         run: git config core.quotepath false
       - name: Setup Pages
