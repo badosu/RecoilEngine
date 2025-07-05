@@ -36,16 +36,6 @@ jobs:
           working_directory: ./doc/site
           install: false # [default: true] we only install deps required by the task
 
-      - name: Cache Restore
-        id: cache-restore
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            ~/.npm
-          key: npm-gen-lua-${{ env.LUA_DOC_EXTRACTOR_VERSION }}-${{ github.run_id }}
-          restore-keys:
-            npm-gen-lua-${{ env.LUA_DOC_EXTRACTOR_VERSION }}
-
       - name: Generate Lua library
         env:
           REPO_REF: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
@@ -78,11 +68,3 @@ jobs:
             Generated from ${{env.LUA_DOC_EXTRACTOR_SOURCE_REF}}
 
             ${{ github.event.head_commit.message }}
-
-      - name: Cache Save
-        id: cache-save
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            ~/.npm
-          key: ${{ steps.cache-restore.outputs.cache-primary-key }}
