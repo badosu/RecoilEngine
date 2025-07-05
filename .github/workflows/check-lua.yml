@@ -37,7 +37,7 @@ jobs:
           mise_toml: |
             [tools]
             lua-language-server = "{{env.LUA_LANGUAGE_SERVER_VERSION}}"
-            "cargo:emmylua_doc_cli" = "{{env.LUA_DOC_EXTRACTOR_VERSION}}"
+            "npm:lua-doc-extractor" = "{{env.LUA_DOC_EXTRACTOR_VERSION}}"
 
       - name: Run lua-language-server --check
         working-directory: ./doc/site

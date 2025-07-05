@@ -36,7 +36,7 @@ jobs:
           working_directory: ./doc/site
           mise_toml: |
             [tools]
-            "cargo:emmylua_doc_cli" = "{{env.LUA_DOC_EXTRACTOR_VERSION}}"
+            "npm:lua-doc-extractor" = "{{env.LUA_DOC_EXTRACTOR_VERSION}}"
 
       - name: Generate Lua library
         working-directory: ./doc/site
