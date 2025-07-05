@@ -34,11 +34,11 @@ jobs:
       - uses: jdx/mise-action@v2
         with:
           working_directory: ./doc/site
-          install: false # [default: true] we only install deps required by the task
+          mise_toml: |
+            [tools]
+            "cargo:emmylua_doc_cli" = "{{env.LUA_DOC_EXTRACTOR_VERSION}}"
 
       - name: Generate Lua library
-        env:
-          REPO_REF: https://github.com/${{ github.repository }}/blob/${{ github.sha }}
         working-directory: ./doc/site
         run: mise run lua_library
 

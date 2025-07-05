@@ -1,11 +1,17 @@
+[settings]
+env = ["shared"]
+
 [tools]
 	# We only install tools required for each task on each task, unless all tasks use a tool here
-	# "aqua:gohugoio/hugo" = "0.147.9"
+	# For CI when we need to install and cache all tools, see mise.ci.toml
 
 [env]
 	HUGO_VERSION = "0.147.9"
-	LUA_DOC_EXTRACTOR_VERSION = "3"
-	EMMYLUA_DOC_CLI_VERSION = "0.8.2"
+	LUA_DOC_EXTRACTOR_VERSION = "3" # lua_library lua_check
+	EMMYLUA_DOC_CLI_VERSION = "0.8.2"	# lua_pages lua_library lua_check
+	LUA_LANGUAGE_SERVER_VERSION="3.15.0" # lua_check
+	JQ_VERSION = "1.8.0" # binary_pages
+	7Z_VERSION = "24.09" # binary_pages
 	LUA_DOC_EXTRACTOR_SOURCE_REF = "https://github.com/beyond-all-reason/RecoilEngine/blob/master"
 	RECOIL_LUA_LIBRARY_DIR = "rts/Lua/library"
 
@@ -50,8 +56,8 @@
 	[tasks.binary_pages]
 	depends = ["latest_release_data"]
 	description = "Generate Docs from Recoil binary"
-	tools."aqua:jqlang/jq" = "1.8.0"
-	tools."aqua:ip7z/7zip" = "24.09"
+	tools."aqua:jqlang/jq" = "{{env.JQ_VERSION}}"
+	tools."aqua:ip7z/7zip" = "{{env.7Z_VERSION}}"
 	run = '''
 		download_url=$(jq -r '.assets[] | select(.name | contains("_linux-64-minimal-portable")).browser_download_url' {{vars.latest_release_data}})
 
@@ -93,7 +99,7 @@
 	[tasks.lua_check]
 	description = "Sanity check lua library with lua language server"
 	depends = ["lua_library"]
-	tools.lua-language-server = "3.15.0"
+	tools.lua-language-server = "{{env.LUA_LANGUAGE_SERVER_VERSION}}"
 	dir = "../../"
 	run = [
 		"lua-language-server --check \"${RECOIL_LUA_LIBRARY_DIR}\""
@@ -101,10 +107,9 @@
 
 	[tasks.lua_library]
 	description = "Generate Lua Docs"
-	tools.node = "22.17.0"
+	tools."npm:lua-doc-extractor" = "{{env.LUA_DOC_EXTRACTOR_VERSION}}"
 	dir = "../../"
 	run = [
-		"npm install -g \"lua-doc-extractor@${LUA_DOC_EXTRACTOR_VERSION}\"",
 		"lua-doc-extractor --src \"{{vars.lua_doc_paths}}\" --dest {{vars.lua_doc_gen_dest}} --repo \"${LUA_DOC_EXTRACTOR_SOURCE_REF}\""
 	]
 

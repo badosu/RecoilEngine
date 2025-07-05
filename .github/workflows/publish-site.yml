@@ -14,6 +14,7 @@ env:
   LUA_DOC_EXTRACTOR_VERSION: "3"
   EMMYLUA_DOC_CLI_VERSION: "0.8.2"
   HUGO_VERSION: "0.147.9"
+  MISE_ENV: "shared,ci"
 jobs:
   build:
     if: github.repository == 'beyond-all-reason/RecoilEngine' || github.event_name == 'workflow_dispatch'
@@ -25,7 +26,6 @@ jobs:
       group: "pages"
       cancel-in-progress: false
     env:
-      TZ: America/Los_Angeles
     steps:
       - name: Install Dependencies
         run: |
@@ -61,7 +61,6 @@ jobs:
         uses: jdx/mise-action@v2
         with:
           working_directory: doc/site # [default: .] directory to run mise in
-          install: false # [default: true] we only install deps required by the task
       - name: Build with Hugo
         env:
           HUGO_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
