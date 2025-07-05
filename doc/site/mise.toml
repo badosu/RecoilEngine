@@ -32,7 +32,6 @@
 
 	[tasks.lua_pages]
 	description = "Generate Lua API Pages"
-	tools."cargo-binstall" = "latest"
 	tools."cargo:emmylua_doc_cli" = "{{env.EMMYLUA_DOC_CLI_VERSION}}"
 	depends = ["lua_library"]
 	dir = "../../"
