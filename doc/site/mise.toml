@@ -33,6 +33,17 @@
 	tools.hugo = "{{env.HUGO_VERSION}}"
 	run = "hugo server --navigateToChanged"
 
+	[tasks.ruby]
+	tools.ruby = "3.3"
+	run = "ruby asd.rb data/doc.json"
+
+	[tasks.lua_json]
+	description = "Generate Lua JSON export"
+	tools."cargo:emmylua_doc_cli" = "{{env.EMMYLUA_DOC_CLI_VERSION}}"
+	depends = ["lua_library"]
+	dir = "../../"
+	run = "emmylua_doc_cli -f json -i $RECOIL_LUA_LIBRARY_DIR -o {{vars.site_dir}}/data"
+
 	[tasks.lua_pages]
 	description = "Generate Lua API Pages"
 	tools."cargo:emmylua_doc_cli" = "{{env.EMMYLUA_DOC_CLI_VERSION}}"
