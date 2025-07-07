@@ -566,10 +566,12 @@ GLint LuaShaders::GetUniformLocation(LuaShaders::Program* p, const char* name)
  * ```
  * 
  * @class UniformParam<T> : { [string]: T|T[] }
+ * @helper
  */
 
 /***
  * @class ShaderParams
+ * @helper
  * 
  * The "Vertex" or vertex-shader is your GLSL-Code as string, its written in a
  * C-Dialect.  This shader is busy deforming the geometry of a unit but it can
@@ -922,6 +924,7 @@ static const char* UniformTypeString(GLenum type)
 
 /***
  * @class ActiveUniform
+ * @helper
  * @field name string
  * @field type string String name of `GL_*` constant.
  * @field length integer The character length of `name`.

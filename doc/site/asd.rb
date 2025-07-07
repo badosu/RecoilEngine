@@ -9,27 +9,21 @@ def md(string)
   "{{< md \"#{string}\" >}}"
 end
 
-def h(level, name, ref, loc = nil)
+def h(level, name, ref, id = nil)
   level = level + 2
 
-  if loc
-    if loc.is_a?(Array)
-      line = loc[0]["line"]
-    else
-      line = loc["line"]
-    end
-  else
-    line = ""
+  if id
+    id = " id=\"#{ref}-h\""
   end
 
-  %Q{<h#{level} id="#{name}-#{line}">#{name}<span class="hx-absolute -hx-mt-20" id="#{ref}"></span><a href="##{ref}" class="subheading-anchor" aria-label="Permalink for this section">#{yield if block_given?}</a></h#{level}>}
+  %Q{<h#{level}#{id}>#{name}<span class="hx-absolute -hx-mt-20" id="#{ref}"></span><a href="##{ref}" class="subheading-anchor" aria-label="Permalink for this section">#{yield if block_given?}</a></h#{level}>}
 end
 
 class Member < OpenStruct
   @@other_matcher = Regexp.compile('\@\*(\w+)\*( (.*))?')
 
   enum_template = ERB.new <<~'EOF'
-    <%= h(level, full_name, full_name, loc) %>
+    <%= h(level, full_name, ref) %>
 
     <% if description %>
 
@@ -50,7 +44,7 @@ class Member < OpenStruct
   EOF
 
   global_template = ERB.new <<~'EOF'
-    <%= h(level, full_name, full_name, loc) %>
+    <%= h(level, full_name, ref) %>
     <% if description %>
 
     <%= description %>
@@ -67,7 +61,7 @@ class Member < OpenStruct
   EOF
 
   fn_template = ERB.new <<~'EOF'
-    <%= h(level, full_name, full_name, loc) %>
+    <%= h(level, full_name, ref) %>
 
     <div class="pl-1">
     <% if description %>
@@ -116,9 +110,9 @@ class Member < OpenStruct
   EOF
 
   dunno_template = ERB.new <<~'EOF'
-    <%= h(level, full_name, full_name, loc) %>
+    <%= h(level, full_name, full_name) %>
     <% if type == :alias %>
-      <em>(alias)<em>
+      <em>(alias)</em>
     <% end %>
     <% if description %>
 
@@ -345,10 +339,6 @@ class Generator
       +++
       title = "Lua API"
       +++
-
-      Headings
-
-      <pre>{{ debug.Dump .Fragments.Headings }}</pre>
 
       ## Table of Contents
 

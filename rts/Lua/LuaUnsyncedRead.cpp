@@ -2856,6 +2856,7 @@ int LuaUnsyncedRead::GetCameraFOV(lua_State* L)
 
 /***
  * @class CameraVectors
+ * @helper
  * @field forward xyz
  * @field up xyz
  * @field right xyz
@@ -3167,10 +3168,9 @@ int LuaUnsyncedRead::GetDrawSeconds(lua_State* L)
  * @section sound
 ******************************************************************************/
 
-/***
+/*** Contains data about a sound device.
  * @class SoundDeviceSpec
- *
- * Contains data about a sound device.
+ * @helper
  *
  * @field name string
  */
@@ -3993,12 +3993,10 @@ int LuaUnsyncedRead::GetScanSymbol(lua_State* L)
 }
 
 
-/***
- * Keybinding
- *
- * Contains data about a keybinding
+/*** Contains data about a keybinding
  *
  * @class KeyBinding
+ * @helper
  * @field command string
  * @field extra string
  * @field boundWith string
@@ -4233,11 +4231,10 @@ int LuaUnsyncedRead::GetGroupUnitsCount(lua_State* L)
 ******************************************************************************/
 
 
-/*** Roster
- *
- * Contains data about a player
+/*** Contains data about a player
  *
  * @class Roster
+ * @helper
  * @field name string
  * @field playerID integer
  * @field teamID integer
@@ -4374,11 +4371,10 @@ int LuaUnsyncedRead::GetPlayerStatistics(lua_State* L)
 ******************************************************************************/
 
 
-/*** Configuration
- *
- * Contains data about a configuration, only name and type are guaranteed
+/*** Contains data about a configuration, only name and type are guaranteed
  *
  * @class Configuration
+ * @helper
  * @field name string
  * @field type string
  * @field description string
@@ -4614,7 +4610,7 @@ int LuaUnsyncedRead::GetGroundDecalMiddlePos(lua_State* L)
 
 /***
  *
- * @function Spring.GetDecalQuadPos
+ * @function Spring.GetGroundDecalQuadPos
  * @param decalID integer
  * @return number? posTL.x
  * @return number posTL.z
@@ -4705,7 +4701,7 @@ int LuaUnsyncedRead::GetGroundDecalTexture(lua_State* L)
 
 /***
  *
- * @function Spring.GetDecalTextures
+ * @function Spring.GetGroundDecalTextures
  * @param isMainTex boolean? (Default: `true`) If `false`, return the texture for normal/glow maps.
  * @return string[] textureNames All textures on the atlas and available for use in `SetGroundDecalTexture`.
  * @see Spring.GetGroundDecalTexture

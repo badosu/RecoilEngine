@@ -29,7 +29,7 @@
  * different archives used at runtime. So you can access map, game & config
  * files via the same interface.
  * 
- * ## Overview
+ * #### Overview
  * 
  * Although Spring can access the filesystem directly (via os module) it is
  * more common that you would want to access files included with your game or
@@ -98,12 +98,12 @@
  * both as that and as just `foo/bar.txt`). Note that `VFS.RAW` is only
  * accessible to unsynced Lua, all synced states are limited to loaded archives.
  *
- * ## Paths
+ * #### Paths
  * 
  * Spring's VFS is **lowercase only**. Also it is **strongly** recommended to
  * use linux style path separators, e.g. `"foo/bar.txt"` and not `"foo\bar.txt"`.
  * 
- * ## Engine read files
+ * #### Engine read files
  * 
  * The engine access a few files directly, most of them are lua files which
  * access other files themselves. Here the list of files that must exist in the
