@@ -24,12 +24,13 @@
 #include "System/Misc/TracyDefs.h"
 #include <tracy/TracyLua.hpp>
 
-/***
- * The Virtual File System is an unified layer to access (read-only) the
+/*** Unified IO for archive and filesystem
+ *
+ * The Virtual File System is a unified layer to access (read-only) the
  * different archives used at runtime. So you can access map, game & config
  * files via the same interface.
  * 
- * #### Overview
+ * ## Overview
  * 
  * Although Spring can access the filesystem directly (via os module) it is
  * more common that you would want to access files included with your game or
@@ -98,12 +99,12 @@
  * both as that and as just `foo/bar.txt`). Note that `VFS.RAW` is only
  * accessible to unsynced Lua, all synced states are limited to loaded archives.
  *
- * #### Paths
+ * ## Paths
  * 
  * Spring's VFS is **lowercase only**. Also it is **strongly** recommended to
  * use linux style path separators, e.g. `"foo/bar.txt"` and not `"foo\bar.txt"`.
  * 
- * #### Engine read files
+ * ## Engine read files
  * 
  * The engine access a few files directly, most of them are lua files which
  * access other files themselves. Here the list of files that must exist in the
@@ -691,7 +692,7 @@ int LuaVFS::GetArchiveContainingFile(lua_State* L)
  * @function VFS.UseArchive
  * @param archiveName string
  * @param fun(...) func
- * @return any ... Results of of the given function
+ * @return any ... Results of the given function
  */
 int LuaVFS::UseArchive(lua_State* L)
 {
