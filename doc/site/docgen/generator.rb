@@ -25,7 +25,7 @@ class Member
     initialize_attributes(parent)
   end
 
-  def generate_members(member_type = nil, opts = {})
+  def generate_children(member_type = nil)
     if member_type
       self.children.map {|c| c.generate(member_type) }.join("\n")
     else
@@ -33,7 +33,11 @@ class Member
     end
   end
 
-  def generate(internal_type = nil, opts = {})
+  def generate_fields(member_type = nil)
+    self.fields.map(&:generate).join("\n")
+  end
+
+  def generate(internal_type = nil)
     internal_type = internal_type || self.type
 
     # weird stuff, for some reason @global becomes @field
@@ -65,21 +69,18 @@ class Member
 
     return value if matches.empty?
 
+    value = value.dup
+
     value.gsub!("<", "&lt;")
     value.gsub!(">", "&gt;")
 
-    found = Set.new
-
-    matches.each do |match|
-      found.add(match) if @@refs.include?(match)
-    end
-
-    found.each {|f| value.gsub!(f, a(f))}
+    matches.select {|m| @@refs.include?(m) }.uniq
+           .each {|m| value.gsub!(m, a(m))}
 
     value
   end
 
-  @@ref_matcher = Regexp.new("`[^`]*`")
+  @@ref_matcher = Regexp.new("`([^`]*)`")
 
   def self.replace_refs(value)
     return value if not value&.is_a?(String)
@@ -88,13 +89,11 @@ class Member
 
     return value if matches.empty?
 
-    found = Set.new
+    value = value.dup
 
-    matches.each do |match|
-      found.add(match) if @@refs.include?(match)
-    end
-
-    found.each{|f| value.gsub!("`#{f}`", a(f)) }
+    matches.map(&:first)
+           .select {|m| @@refs.include?(m) }.uniq
+           .each {|m| value.gsub!("`#{m}`", a(m)) }
 
     value
   end
@@ -114,9 +113,13 @@ class Member
       p["desc"] = Member.replace_refs(p["desc"])
     end
 
-    if type == :alias
-      self.typeref = "<code>#{Member.replace_deep_type_refs(self.typ)}</code>"
+    if self.name == "VBOAttributeDef"
+      
+      puts "DEFINE"
+      puts self
     end
+
+    self.typeref = Member.replace_deep_type_refs(self.typ)
 
     if self.description
       self.description&.gsub!("##", "####")
@@ -127,6 +130,7 @@ class Member
     end
 
     children.each(&:process_refs)
+    fields.each(&:process_refs)
   end
 
   def process_members()
@@ -183,14 +187,11 @@ class Member
     end
 
     self.type = self.type.to_sym
+    self.type = :function if self.type == :fn
 
     self.members = self.members || []
-    self.children = self.children || []
-
-    if full_name == "Spring.CallAsTeam"
-      puts internal_type
-      puts self.params
-    end
+    self.children = []
+    self.fields = []
 
     if not self.members.empty?
       aliases, non_aliases = self.members.map {|m| Member.new(m, self) }
@@ -199,7 +200,12 @@ class Member
       self.members = non_aliases
       self.aliases = aliases
 
-      self.children = process_members()# .sort { |m1, m2| Member.compare(m1, m2) }
+      processed_members = process_members()# .sort { |m1, m2| Member.compare(m1, m2) }
+
+      fields, children = processed_members.partition {|c| c.type == :field }
+
+      self.fields = fields
+      self.children = children
     end
 
     extract_custom_tags()

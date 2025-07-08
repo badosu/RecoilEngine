@@ -4,29 +4,29 @@ def md(string)
   %Q({{< md "#{string}" >}})
 end
 
+H_TEMPLATE = ERB.new <<~'EOF'
+  <h<%= dom_level %> <%= "class=#{klass}" if klass %>>
+  <%= name %>
+  <span id="<%= ref %>" class="hx-absolute -hx-mt-20"></span>
+  <a href="#<%= ref %>" class="subheading-anchor" aria-label="Permalink for this section"></a>
+  </h<%= dom_level %>>
+EOF
+
 def h(dom_level, name, ref, klass=nil)
   dom_level = dom_level + 2
 
-  <<~EOF
-    <h#{dom_level} #{"class=#{klass}" if klass}>
-    #{name}
-    <span class="hx-absolute -hx-mt-20" id="#{ref}"></span>
-    <a href="##{ref}" class="subheading-anchor" aria-label="Permalink for this section"></a>
-    </h#{dom_level}>
-  EOF
+  H_TEMPLATE.result(binding)
 end
 
 class Member < OpenStruct
   @@enum_template = ERB.new <<~'EOF'
-    <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %>
-    </div>
+    <%= h(dom_level, full_name + ' <em class="hx-text-sm">(' + type.to_s + (" overload #{overload_index}" if overload_index).to_s + ')</em>', ref) %>
 
     <%= md description %>
 
     <% if deprecated %>
 
-    Deprecated <%= deprecated %>
+    Deprecated<%= ": #{deprecation_reason}" if deprecation_reason %>
     <% end %>
     <% if see %>
 
@@ -34,19 +34,16 @@ class Member < OpenStruct
     <% end %>
 
     <dl class="inline">
-    <%= generate_members() %>
+    <%= generate_children() %>
     </dl>
   EOF
 
-  @@fn_template = ERB.new <<~'EOF'
-    <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm"><%= "(overload #{overload_index}) " if overload_index %></em>
-    </div>
-
+  @@function_template = ERB.new <<~'EOF'
+    <%= h(dom_level, full_name + ' <em class="hx-text-sm">(' + type.to_s + (" overload #{overload_index}" if overload_index).to_s + ')</em>', ref) %>
     <%= md description %>
     <% if deprecated %>
 
-    Deprecated <%= deprecated %>
+    Deprecated<%= ": #{deprecation_reason}" if deprecation_reason %>
     <% end %>
     <% if see %>
 
@@ -82,85 +79,100 @@ class Member < OpenStruct
   EOF
 
   @@table_template = ERB.new <<~'EOF'
-    <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>)</em>
-    </div>
+    <%= h(dom_level, full_name + ' <em class="hx-text-sm">(' + type.to_s + (" overload #{overload_index}" if overload_index).to_s + ')</em>', ref) %>
 
     <%= md description %>
     <% if deprecated %>
 
-    Deprecated <%= deprecated %>
+    Deprecated<%= ": #{deprecation_reason}" if deprecation_reason %>
     <% end %>
     <% if see %>
 
     See <%= see %>
     <% end %>
 
-    <% if not members.empty? %>
+    <% if not children.empty? %>
     <%= h(dom_level + 1, "Members", "#{ref}_members") %>
 
-    <%= generate_members() %>
+    <%= generate_children() %>
+    <% end %>
+
+    <% if not fields.empty? %>
+    <%= h(dom_level + 1, "Fields", "#{ref}_returns") %>
+
+    <dl><%= generate_fields() %></dl>
     <% end %>
   EOF
 
   @@class_template = ERB.new <<~'EOF'
-    <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>)</em>
-    </div>
+    <%= h(dom_level, full_name + ' <em class="hx-text-sm">(' + type.to_s + (" overload #{overload_index}" if overload_index).to_s + ')</em>', ref) %>
+
+    <% if not bases.empty? %>
+    Inherits <% bases.each do |base| %><code><%= base %></code> <% end %>
+    <% end %>
+
 
     <%= md description %>
     <% if deprecated %>
 
-    Deprecated <%= deprecated %>
+    Deprecated<%= ": #{deprecation_reason}" if deprecation_reason %>
     <% end %>
     <% if see %>
 
     See <%= see %>
     <% end %>
 
+    <% if not children.empty? %>
     <%= h(dom_level + 1, "Members", "#{ref}_members") %>
 
-    <% if not members.empty? %>
-    <dl><%= generate_members() %></dl>
+    <%= generate_children() %>
+    <% end %>
+
+    <% if not fields.empty? %>
+    <%= h(dom_level + 1, "Fields", "#{ref}_returns") %>
+
+    <dl><%= generate_fields() %></dl>
     <% end %>
   EOF
 
   @@global_template = ERB.new <<~'EOF'
-    <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>)</em>
-    </div>
+    <%= h(dom_level, full_name + ' <em class="hx-text-sm">(' + type.to_s + (" overload #{overload_index}" if overload_index).to_s + ')</em>', ref) %>
 
     <%= md description %>
     <% if deprecated %>
 
-    Deprecated <%= deprecated %>
+    Deprecated<%= ": #{deprecation_reason}" if deprecation_reason %>
     <% end %>
     <% if see %>
 
     See <%= see %>
     <% end %>
 
+    <% if not children.empty? %>
     <%= h(dom_level + 1, "Members", "#{ref}_members") %>
 
-    <% if not members.empty? %>
-    <dl><%= generate_members() %></dl>
+    <%= generate_children() %>
+    <% end %>
+
+    <% if not fields.empty? %>
+    <%= h(dom_level + 1, "Fields", "#{ref}_returns") %>
+
+    <dl><%= generate_fields() %></dl>
     <% end %>
   EOF
 
   @@alias_template = ERB.new <<~'EOF'
     <dt id="<%= ref %>"><a href="#<%= ref %>"><%= full_name %></a></dt>
-    <dd><%= typeref %></dd>
+    <dd><code><%= literal || typeref %></code></dd>
   EOF
 
   @@dunno_template = ERB.new <<~'EOF'
-    <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>)</em>
-    </div>
+    <%= h(dom_level, full_name + ' <em class="hx-text-sm">(' + type.to_s + (" overload #{overload_index}" if overload_index).to_s + ')</em>', ref) %>
 
     <%= md description %>
     <% if deprecated %>
 
-    Deprecated <%= deprecated %>
+    Deprecated<%= ": #{deprecation_reason}" if deprecation_reason %>
     <% end %>
     <% if see %>
 
@@ -179,7 +191,7 @@ class Member < OpenStruct
 
     <% if type != :enum && !custom["no_toc_contents"] %>
     <dl class="hx-grid hx-gap-2 grid-cols-2 mt-1 pl-1">
-      <%= generate_members(:definition_field) %>
+      <%= generate_children(:definition_field) %>
     </dl>
     <% end %>
     <% end %>
@@ -191,7 +203,7 @@ class Member < OpenStruct
   EOF
 
   @@field_template = ERB.new <<~'EOF'
-    <dt id="<%= ref %>"><a href="#<%= ref %>"><%= name %></a> <% if literal %><code><%= literal %></code> <% elsif typ %><code><%= typ %></code><% end %></dt>
+    <dt id="<%= ref %>"><code><%= literal || typeref %></code> <a href="#<%= ref %>"><%= name %></a></dt>
     <dd><%= md(description) %></dd>
   EOF
 
@@ -203,7 +215,7 @@ class Member < OpenStruct
     definition: @@definition_template,
     definition_field: @@definition_field_template,
     class: @@class_template,
-    fn: @@fn_template,
+    function: @@function_template,
     alias: @@alias_template,
   }
 end
