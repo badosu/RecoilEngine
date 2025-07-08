@@ -8,9 +8,9 @@ def h(dom_level, name, ref, klass=nil)
   dom_level = dom_level + 2
 
   <<~EOF
-    <h#{dom_level} #{"class=#{klass}" if klass}" id="#{ref}">
+    <h#{dom_level} #{"class=#{klass}" if klass}>
     #{name}
-    <span class="hx-absolute -hx-mt-20"></span>
+    <span class="hx-absolute -hx-mt-20" id="#{ref}"></span>
     <a href="##{ref}" class="subheading-anchor" aria-label="Permalink for this section"></a>
     </h#{dom_level}>
   EOF
@@ -19,10 +19,10 @@ end
 class Member < OpenStruct
   @@enum_template = ERB.new <<~'EOF'
     <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm"><%= md(summary) %></em>
+      <%= h(dom_level, full_name, ref, "align-center") %>
     </div>
 
-    <%= md short_description %>
+    <%= md description %>
 
     <% if deprecated %>
 
@@ -40,14 +40,10 @@ class Member < OpenStruct
 
   @@fn_template = ERB.new <<~'EOF'
     <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm"><%= "(overload #{overload_index}) " if overload_index %><%= md(summary) %></em>
+      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm"><%= "(overload #{overload_index}) " if overload_index %></em>
     </div>
 
-    ```lua
-    <%= (returns.map {|p| p["name"] }.join(", ") + " = ") unless returns.reject {|r| r["name"].nil? or r["name"].empty? }.empty?  %><%= full_name %>(<%= params.map {|p| p["name"] }.join(", ") unless params.empty? %>)
-    ```
-
-    <%= md short_description %>
+    <%= md description %>
     <% if deprecated %>
 
     Deprecated <%= deprecated %>
@@ -57,32 +53,29 @@ class Member < OpenStruct
     See <%= see %>
     <% end %>
 
-    <%= h(dom_level + 1, "Arguments", "#{ref}_arguments") %>
+    ```lua
+    <%= full_name %>(<%= params.map {|p| p["typ"] }.join(", ") unless params.empty?
+  %>) -> <% if returns.empty? %>nil<% else %><%= returns.map {|p| p["typ"] }.join(", ")  %><% end %>
+    ```
 
-    <% if params.empty? %>
-      No arguments
-    <% else %>
+    <% if not params.empty? %>
+    <%= h(dom_level + 1, "Parameters", "#{ref}_arguments") %>
+
     <dl>
     <% params.each do |param| %>
-      <dt><%= param["name"] %></dt>
-      <dd>
-        <code><%= param["typeref"] %></code> <%= md(param["desc"]) %>
-      </dd>
+    <dt><code><%= param["typeref"] %></code> <%= param["name"] %></dt>
+    <dd><%= md(param["desc"]) %></dd>
     <% end %>
     </dl>
     <% end %>
 
+    <% if not returns.empty? %>
     <%= h(dom_level + 1, "Returns", "#{ref}_returns") %>
 
-    <% if returns.empty? %>
-      No return value (`nil`)
-    <% else %>
     <dl>
     <% returns.each do |return_value| %>
-      <dt><%= return_value["name"] %></dt>
-      <dd>
-        <code><%= return_value["typeref"] %></code> <%= md(return_value["desc"]) %>
-      </dd>
+    <dt><code><%= return_value["typeref"] %></code> <%= return_value["name"] %></dt>
+    <dd><%= md(return_value["desc"]) %></dd>
     <% end %>
     </dl>
     <% end %>
@@ -90,10 +83,10 @@ class Member < OpenStruct
 
   @@table_template = ERB.new <<~'EOF'
     <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>) <%= md(summary) %></em>
+      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>)</em>
     </div>
 
-    <%= md short_description %>
+    <%= md description %>
     <% if deprecated %>
 
     Deprecated <%= deprecated %>
@@ -103,9 +96,7 @@ class Member < OpenStruct
     See <%= see %>
     <% end %>
 
-    <% if members.empty? %>
-    No members
-    <% else %>
+    <% if not members.empty? %>
     <%= h(dom_level + 1, "Members", "#{ref}_members") %>
 
     <%= generate_members() %>
@@ -114,10 +105,10 @@ class Member < OpenStruct
 
   @@class_template = ERB.new <<~'EOF'
     <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>) <%= md(summary) %></em>
+      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>)</em>
     </div>
 
-    <%= md short_description %>
+    <%= md description %>
     <% if deprecated %>
 
     Deprecated <%= deprecated %>
@@ -129,19 +120,17 @@ class Member < OpenStruct
 
     <%= h(dom_level + 1, "Members", "#{ref}_members") %>
 
-    <% if members.empty? %>
-    No members
-    <% else %>
+    <% if not members.empty? %>
     <dl><%= generate_members() %></dl>
     <% end %>
   EOF
 
   @@global_template = ERB.new <<~'EOF'
     <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>) <%= md(summary) %></em>
+      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>)</em>
     </div>
 
-    <%= md short_description %>
+    <%= md description %>
     <% if deprecated %>
 
     Deprecated <%= deprecated %>
@@ -153,9 +142,7 @@ class Member < OpenStruct
 
     <%= h(dom_level + 1, "Members", "#{ref}_members") %>
 
-    <% if members.empty? %>
-    No members
-    <% else %>
+    <% if not members.empty? %>
     <dl><%= generate_members() %></dl>
     <% end %>
   EOF
@@ -167,10 +154,10 @@ class Member < OpenStruct
 
   @@dunno_template = ERB.new <<~'EOF'
     <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-center">
-      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>) <%= md(summary) %></em>
+      <%= h(dom_level, full_name, ref, "align-center") %><em class="hx-text-sm">(<%= type %>)</em>
     </div>
 
-    <%= md short_description %>
+    <%= md description %>
     <% if deprecated %>
 
     Deprecated <%= deprecated %>
@@ -182,8 +169,7 @@ class Member < OpenStruct
   EOF
 
   @@definition_template = ERB.new <<~'EOF'
-    <% if type == :alias || custom["helper"] %>
-    <% else %>
+    <% if type != :alias && !custom["helper"] %>
     <div class="hx-grid hx-gap-2 grid-cols-2 mb-1 mt-1 align-baseline">
       <h3 id="<%= ref %>-heading" data-notoc="">
         <a href="#<%= ref %>"><%= name %> <% if overload_index %> <em class="hx-text-sm">(overload <%= overload_index %>)</em> <% end %></a>
@@ -205,8 +191,8 @@ class Member < OpenStruct
   EOF
 
   @@field_template = ERB.new <<~'EOF'
-    <dt><a href="#<%= ref %>"><%= name %></a> <em class="hx-text-sm"><%= md(summary) %></em></dt>
-    <dd><% if literal %><code><%= literal %></code> <% elsif typ %><code><%= typ %></code> <% end %><%= md(short_description) %></dd>
+    <dt id="<%= ref %>"><a href="#<%= ref %>"><%= name %></a> <% if literal %><code><%= literal %></code> <% elsif typ %><code><%= typ %></code><% end %></dt>
+    <dd><%= md(description) %></dd>
   EOF
 
   @@templates = {

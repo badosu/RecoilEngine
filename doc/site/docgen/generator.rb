@@ -82,11 +82,11 @@ class Member
   @@ref_matcher = Regexp.new("`[^`]*`")
 
   def self.replace_refs(value)
-    return if not value&.is_a?(String)
+    return value if not value&.is_a?(String)
 
     matches = value.scan(@@ref_matcher)
 
-    return if matches.empty?
+    return value if matches.empty?
 
     found = Set.new
 
@@ -163,6 +163,7 @@ class Member
   private
 
   def initialize_attributes(parent)
+    self.parent = parent
     self.level = parent ? parent.level + 1 : 0
     self.dom_level = self.level
 
@@ -185,6 +186,11 @@ class Member
 
     self.members = self.members || []
     self.children = self.children || []
+
+    if full_name == "Spring.CallAsTeam"
+      puts internal_type
+      puts self.params
+    end
 
     if not self.members.empty?
       aliases, non_aliases = self.members.map {|m| Member.new(m, self) }
@@ -275,7 +281,7 @@ class Generator
 
   def generate
     alias_content = "## Aliases\n\n<dl>#{@aliases.map(&:generate).join("\n")}</dl>" if not @aliases.empty?
-      
+
     <<~EOF
       +++
       title = "Lua API"
