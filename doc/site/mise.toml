@@ -38,7 +38,7 @@
 	description = "Generate Lua API Pages"
 	depends = ["lua_json"]
 	tools.ruby = "{{env.RUBY_VERSION}}"
-	run = "ruby docgen/generator.rb --out=content/docs/lua-api/index.md --doc=data/doc.json"
+	run = "ruby docgen/generator.rb --out=content/docs/lua-api/_index.md --doc=data/doc.json"
 
 	[tasks.lua_json]
 	description = "Generate Lua JSON export"
