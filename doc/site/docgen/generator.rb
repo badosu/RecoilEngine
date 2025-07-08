@@ -327,6 +327,8 @@ def run()
 
   generated = generator.generate()
 
+  puts "Writing to #{File.expand_path(args.out)}"
+
   File.open(args.out, "w") { |f| f.write(generated) }
 end
 
