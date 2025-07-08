@@ -9,6 +9,7 @@
 	LUA_LANGUAGE_SERVER_VERSION = "3.15.0" # lua_check
 	JQ_VERSION = "1.8.0" # binary_pages
 	7Z_VERSION = "24.09" # binary_pages
+	RUBY_VERSION = "3.3" # lua_pages
 	LUA_DOC_EXTRACTOR_SOURCE_REF = "https://github.com/beyond-all-reason/RecoilEngine/blob/master"
 	RECOIL_LUA_LIBRARY_DIR = "rts/Lua/library"
 
@@ -36,7 +37,7 @@
 	[tasks.lua_pages]
 	description = "Generate Lua API Pages"
 	depends = ["lua_json"]
-	tools.ruby = "3.3"
+	tools.ruby = "{{env.RUBY_VERSION}}"
 	run = "ruby docgen/generator.rb --out=content/docs/lua-api/index.md --doc=data/doc.json"
 
 	[tasks.lua_json]
