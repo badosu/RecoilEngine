@@ -33,9 +33,11 @@
 	tools.hugo = "{{env.HUGO_VERSION}}"
 	run = "hugo server --navigateToChanged"
 
-	[tasks.ruby]
+	[tasks.lua_pages]
+	description = "Generate Lua API Pages"
+	depends = ["lua_json"]
 	tools.ruby = "3.3"
-	run = "ruby asd.rb data/doc.json"
+	run = "ruby docgen/generator.rb --out=content/docs/lua-api/index.md --doc=data/doc.json"
 
 	[tasks.lua_json]
 	description = "Generate Lua JSON export"
@@ -43,23 +45,6 @@
 	depends = ["lua_library"]
 	dir = "../../"
 	run = "emmylua_doc_cli -f json -i $RECOIL_LUA_LIBRARY_DIR -o {{vars.site_dir}}/data"
-
-	[tasks.lua_pages]
-	description = "Generate Lua API Pages"
-	tools."cargo:emmylua_doc_cli" = "{{env.EMMYLUA_DOC_CLI_VERSION}}"
-	depends = ["lua_library"]
-	dir = "../../"
-	run = [
-		"emmylua_doc_cli -i $RECOIL_LUA_LIBRARY_DIR -o {{vars.lua_pages_dir}} --override-template {{vars.emmylua_cli_template}}",
-		# emmylua_doc_cli does this dumb shit where they hardcode a `docs` dir
-		"mv {{vars.lua_pages_dir}}/docs/index.md {{vars.lua_pages_dir}}/_index.md",
-		"cp -R {{vars.lua_pages_dir}}/docs/* {{vars.lua_pages_dir}}",
-		"rm -rf {{vars.lua_pages_dir}}/docs",
-		# Hugo requires _index.md for root categories
-		"cp {{vars.emmylua_cli_template}}/globals_index.md {{vars.lua_pages_dir}}/globals/_index.md",
-		"cp {{vars.emmylua_cli_template}}/modules_index.md {{vars.lua_pages_dir}}/modules/_index.md",
-		"cp {{vars.emmylua_cli_template}}/types_index.md {{vars.lua_pages_dir}}/types/_index.md"
-	]
 
 	[tasks.binary_pages]
 	depends = ["latest_release_data"]

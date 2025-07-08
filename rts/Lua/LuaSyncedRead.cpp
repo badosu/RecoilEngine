@@ -6554,7 +6554,7 @@ int LuaSyncedRead::GetFactoryCounts(lua_State* L)
  *
  * @param unitID integer
  * @param count 0 Returns the number of commands in the units queue.
- * @return integer The number of commands in the unit queue.
+ * @return integer cmdCount The number of commands in the unit queue.
  *
  */
 
