@@ -113,12 +113,6 @@ class Member
       p["desc"] = Member.replace_refs(p["desc"])
     end
 
-    if self.name == "VBOAttributeDef"
-      
-      puts "DEFINE"
-      puts self
-    end
-
     self.typeref = Member.replace_deep_type_refs(self.typ)
 
     if self.description
