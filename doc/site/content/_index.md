@@ -9,8 +9,6 @@ draft = false
 <h4 data-notoc="">Some of the games Recoil powers:</h4>
 </div>
 
-<code>asd&lt;asd&gt; asd &lt;/asd&gt;asd</code>
-
 {{< cards cols=2 >}}
 {{< card title="Beyond All Reason" image="showcase/beyond_all_reason.avif" link="https://beyondallreason.info" >}}
 {{< card title="Zero-K" image="showcase/zk.jpg" link="https://zero-k.info" >}}
